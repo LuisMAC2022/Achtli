@@ -1,0 +1,20 @@
+figure{
+  position: relative;
+  display: inline-block;
+}
+
+figcaption{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: rga(0,0,0,0.7); //negro, con transparencia 0.7
+  color: white;
+  text-align: center;
+  padding:10px 0;
+}
+
+img{
+  display:block;
+  width:  100%;
+  height: auto;
+}
