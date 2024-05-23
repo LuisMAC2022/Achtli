@@ -10,7 +10,7 @@ figcaption{
   color: white;
   background-color: rgba(0,0,0,0.7); /* negro con transparencia al 70% */
   text-align: center;
-  padding:10px 0;
+  padding:0 0;
   box-sizing: border-box;
 }
 
