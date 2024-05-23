@@ -5,13 +5,17 @@ figure{
 
 figcaption{
   position: absolute;
-  bottom: -10;
+  bottom: 15px;
   width: 100%;
   color: white;
   background-color: rgba(0,0,0,0.7); /* negro con transparencia al 70% */
   text-align: center;
   padding:0 0;
   box-sizing: border-box;
+}
+
+figcaption a{
+  color: yellow;
 }
 
 img{
