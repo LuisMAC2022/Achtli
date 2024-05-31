@@ -1,2 +1,7 @@
 # Achtli
-Este es un proyecto que busca la restauracion y proteccion del medio ambiente a travez del entendimiento, la conciencia social y la autonomia universitaria.
+Este es un proyecto que busca recuperar la memoria mexica por medio del rescate al medio ambiente
+
+cambios por añadir:
+
+-> sustituir imagenes de baja resolucion con mapas de google (falta creacion de api de google)
+-> asegurarse que el diseño sea accesible 
