@@ -1,10 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-  <title>Mi Página en GitHub Pages</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Achtli - Proyecto de reconexión con la naturaleza</title>
+  <style>
+    /* Estilos básicos y responsivos */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    header, nav, main, footer {
+      padding: 1rem;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    nav li {
+      margin-right: 1rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #0366d6;
+    }
+
+    @media (min-width: 600px) {
+      main {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      section {
+        flex: 1 1 45%;
+        margin: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>¡Bienvenido a mi página en GitHub Pages!</h1>
-  <p>Este es un sitio estático alojado en GitHub Pages.</p>
+  <a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+  <header>
+    <h1>Achtli</h1>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="#introduccion">Introducción</a></li>
+        <li><a href="#ambiental">Beneficios Ambientales</a></li>
+        <li><a href="#social">Beneficios Sociales</a></li>
+        <li><a href="#alianzas">Alianzas</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="contenido">
+    <section id="introduccion">
+      <h2>Introducción</h2>
+      <p><!-- Contenido introductorio aquí --></p>
+    </section>
+
+    <section id="ambiental">
+      <h2>Beneficios Ambientales</h2>
+      <p><!-- Detalles sobre la reducción de residuos y otras acciones --></p>
+    </section>
+
+    <section id="social">
+      <h2>Beneficios Sociales</h2>
+      <p><!-- Información sobre el apoyo a comunidades vulnerables --></p>
+    </section>
+
+    <section id="alianzas">
+      <h2>Alianzas</h2>
+      <p><!-- Descripción de colaboraciones y redes dentro de la universidad --></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Achtli</p>
+  </footer>
 </body>
 </html>
