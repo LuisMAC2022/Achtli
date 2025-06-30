@@ -59,8 +59,9 @@ async function start() {
     console.warn('WASM failed, falling back to JS implementation', e);
     game = new JsGame(canvas.width, canvas.height);
   }
-
+  
   canvas.focus();
+
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
