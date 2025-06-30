@@ -27,3 +27,15 @@ img{
 canvas {
   touch-action: none;
 }
+
+#plant-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.8);
+  color: white;
+  padding: 8px;
+  max-width: 200px;
+  display: none;
+  font-family: sans-serif;
+}
