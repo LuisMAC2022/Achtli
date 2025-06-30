@@ -1,23 +1,5 @@
 const VERSION = '0.0.0.0';
 
-function jsCollectAt(plants, x, y) {
-  if (!plants) return false;
-  let i = 0;
-  let hit = false;
-  while (i < plants.length) {
-    const p = plants[i];
-    const dx = x - p.x;
-    const dy = y - p.y;
-    if (Math.sqrt(dx * dx + dy * dy) < 20) {
-      plants.splice(i, 1);
-      hit = true;
-    } else {
-      i++;
-    }
-  }
-  return hit;
-}
-
 async function start() {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
@@ -55,14 +37,27 @@ async function start() {
   const counter = document.getElementById('counter');
   let lastCollected = 0;
 
-  function jsCollectAtWrapper(x, y) {
-    const hit = jsCollectAt(jsPlants, x, y);
-    if (hit) jsCollected++;
+  function jsCollectAt(x, y) {
+    if (!jsPlants) return false;
+    let i = 0;
+    let hit = false;
+    while (i < jsPlants.length) {
+      const p = jsPlants[i];
+      const dx = x - p.x;
+      const dy = y - p.y;
+      if (Math.sqrt(dx * dx + dy * dy) < 20) {
+        jsPlants.splice(i, 1);
+        jsCollected++;
+        hit = true;
+      } else {
+        i++;
+      }
+    }
     return hit;
   }
 
   function jsCheckCollisions() {
-    jsCollectAtWrapper(player.x + playerSize / 2, player.y + playerSize / 2);
+    jsCollectAt(player.x + playerSize / 2, player.y + playerSize / 2);
   }
 
   canvas.focus();
@@ -129,7 +124,7 @@ async function start() {
 
   if (window.PointerEvent) {
     canvas.addEventListener('pointerdown', (e) => {
-      const hit = game ? game.collect_at(e.clientX, e.clientY) : jsCollectAtWrapper(e.clientX, e.clientY);
+      const hit = game ? game.collect_at(e.clientX, e.clientY) : jsCollectAt(e.clientX, e.clientY);
       if (!hit) {
         startDrag(e.clientX, e.clientY);
         canvas.setPointerCapture(e.pointerId);
@@ -141,7 +136,7 @@ async function start() {
   } else {
     canvas.addEventListener('touchstart', (e) => {
       const t = e.touches[0];
-      const hit = game ? game.collect_at(t.clientX, t.clientY) : jsCollectAtWrapper(t.clientX, t.clientY);
+      const hit = game ? game.collect_at(t.clientX, t.clientY) : jsCollectAt(t.clientX, t.clientY);
       if (!hit) {
         startDrag(t.clientX, t.clientY);
       }
@@ -209,8 +204,4 @@ async function start() {
   draw();
 }
 
-if (typeof document !== 'undefined') {
-  start();
-}
-
-export { jsCollectAt };
+start();
