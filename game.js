@@ -11,37 +11,52 @@ async function start() {
   window.addEventListener('resize', resize);
 
   let wasmModule = null;
+  let game = null;
   try {
     const wasm = await import('./wasm_game/pkg/wasm_game.js');
     await wasm.default();
     wasm.draw_pink();
     wasmModule = wasm;
+    game = new wasm.Game(canvas.width, canvas.height);
   } catch (e) {
     console.warn('WASM failed, drawing pink with JS', e);
   }
 
-  const player = { x: canvas.width / 2 - 10, y: canvas.height / 2 - 10, size: 20 };
+  const playerSize = 20;
+  const player = { x: canvas.width / 2 - playerSize / 2, y: canvas.height / 2 - playerSize / 2 };
   const speed = 5;
+  const counter = document.getElementById('counter');
+  let lastCollected = 0;
 
   canvas.focus();
   canvas.addEventListener('keydown', (e) => {
+    let dx = 0;
+    let dy = 0;
     switch (e.key) {
       case 'ArrowUp':
         e.preventDefault();
-        player.y = Math.max(0, player.y - speed);
+        dy = -speed;
         break;
       case 'ArrowDown':
         e.preventDefault();
-        player.y = Math.min(canvas.height - player.size, player.y + speed);
+        dy = speed;
         break;
       case 'ArrowLeft':
         e.preventDefault();
-        player.x = Math.max(0, player.x - speed);
+        dx = -speed;
         break;
       case 'ArrowRight':
         e.preventDefault();
-        player.x = Math.min(canvas.width - player.size, player.x + speed);
+        dx = speed;
         break;
+      default:
+        return;
+    }
+    if (game) {
+      game.move_player(dx, dy);
+    } else {
+      player.x = Math.max(0, Math.min(canvas.width - playerSize, player.x + dx));
+      player.y = Math.max(0, Math.min(canvas.height - playerSize, player.y + dy));
     }
   });
 
@@ -61,8 +76,12 @@ async function start() {
     const dy = y - lastY;
     lastX = x;
     lastY = y;
-    player.x = Math.max(0, Math.min(canvas.width - player.size, player.x + dx));
-    player.y = Math.max(0, Math.min(canvas.height - player.size, player.y + dy));
+    if (game) {
+      game.move_player(dx, dy);
+    } else {
+      player.x = Math.max(0, Math.min(canvas.width - playerSize, player.x + dx));
+      player.y = Math.max(0, Math.min(canvas.height - playerSize, player.y + dy));
+    }
   }
 
   function endDrag() {
@@ -98,8 +117,26 @@ async function start() {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(player.x, player.y, player.size, player.size);
+    if (game) {
+      const positions = game.plant_positions();
+      ctx.fillStyle = 'green';
+      for (let i = 0; i < positions.length; i++) {
+        const [x, y] = positions[i];
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      const collected = game.collected();
+      if (collected !== lastCollected) {
+        counter.textContent = collected;
+        lastCollected = collected;
+      }
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(game.player_x(), game.player_y(), playerSize, playerSize);
+    } else {
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(player.x, player.y, playerSize, playerSize);
+    }
 
     requestAnimationFrame(draw);
   }
