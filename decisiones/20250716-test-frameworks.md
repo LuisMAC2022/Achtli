@@ -12,6 +12,4 @@ Contar con pruebas básicas ayuda a mantener la estabilidad del juego durante fu
 
 ## Sugerencias
 La instalación de `wasm-pack` puede tardar; se podría cachear en el entorno de CI. También sería útil ampliar la cobertura con más casos de juego.
-
-###SHA
-<<git SHA>>
+A futuro podria separarse mejor la logica para facilitar el testeo y la reutilizacion
