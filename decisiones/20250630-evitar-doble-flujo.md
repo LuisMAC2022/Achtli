@@ -14,4 +14,4 @@ El flujo se disparaba dos veces: la ejecución inicial y una segunda vez por el 
 La solución funciona pero se recomienda revisar periódicamente que `[skip ci]` siga siendo soportado por GitHub Actions.
 
 ###SHA
-<<git SHA>>
+78ec53f5b337f9f3efd9b3aba32ed7ae1b630b5a

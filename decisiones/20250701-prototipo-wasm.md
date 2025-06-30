@@ -14,4 +14,4 @@ Implementar este prototipo permite validar la integracion entre Rust, WebAssembl
 El siguiente paso podria incluir generar las plantas en posiciones aleatorias y refinar las colisiones. Tambien conviene revisar el rendimiento del wasm generado y su tamaño al desplegar.
 
 ###SHA
-<<git SHA>>
+78ec53f5b337f9f3efd9b3aba32ed7ae1b630b5a
