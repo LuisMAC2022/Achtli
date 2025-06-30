@@ -1,3 +1,5 @@
+const VERSION = '0.0.0.0';
+
 async function start() {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
@@ -137,6 +139,13 @@ async function start() {
       ctx.fillStyle = 'blue';
       ctx.fillRect(player.x, player.y, playerSize, playerSize);
     }
+
+    // Draw version text on the top-right corner
+    ctx.font = '16px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'top';
+    ctx.fillStyle = 'white';
+    ctx.fillText(`version ${VERSION}`, canvas.width - 10, 10);
 
     requestAnimationFrame(draw);
   }
