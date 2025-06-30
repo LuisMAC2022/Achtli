@@ -13,5 +13,3 @@ Sin la etiqueta `viewport` las coordenadas táctiles no coincidían con el lienz
 ## Sugerencias
 Se podría animar la desaparición de la planta y generar posiciones aleatorias para mayor rejugabilidad.
 
-###SHA
-<git SHA>

@@ -13,5 +13,3 @@ El usuario solicitó visualizar la versión con cada prueba y este texto permite
 ## Sugerencias
 El número de versión debe incrementarse manualmente en `game.js` con cada cambio futuro. Sería útil automatizar este proceso.
 
-###SHA
-8f326f57cbd180e6e6ad3a7ca7b4839e51c421ba
