@@ -13,5 +13,3 @@ Al indicarle a `git push` la rama `main` se evita el error de permisos reportado
 ## Sugerencias
 Agregar pruebas que verifiquen el flujo de despliegue y documentar mejor las fases del prototipo.
 
-###SHA
-0a5088f5201a2413931f4c2c1de51aee22f8de3a

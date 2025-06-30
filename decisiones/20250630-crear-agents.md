@@ -13,6 +13,4 @@ Documentar los roles facilita la colaboracion y mantiene una vision clara del pr
 ## Sugerencias
 La estructura podria ampliarse con ejemplos de buenas practicas y enlaces a recursos externos en futuras versiones.
 
-###SHA
-43c2f503b488692194d153365c5c92421876c25a
 
