@@ -25,9 +25,9 @@ async function start() {
   } catch (e) {
     console.warn('WASM failed, drawing pink with JS', e);
     jsPlants = [
-      { species: 'fast', stage: 0, timer: 0, x: 50, y: 50 },
-      { species: 'medium', stage: 0, timer: 0, x: 150, y: 80 },
-      { species: 'slow', stage: 0, timer: 0, x: 80, y: 150 }
+      { x: 50, y: 50 },
+      { x: 150, y: 80 },
+      { x: 80, y: 150 }
     ];
   }
 
@@ -36,7 +36,6 @@ async function start() {
   const speed = 5;
   const counter = document.getElementById('counter');
   let lastCollected = 0;
-  let lastTime = performance.now();
 
   function jsCollectAt(x, y) {
     if (!jsPlants) return false;
@@ -59,33 +58,6 @@ async function start() {
 
   function jsCheckCollisions() {
     jsCollectAt(player.x + playerSize / 2, player.y + playerSize / 2);
-  }
-
-  function intervalForSpecies(species) {
-    switch (species) {
-      case 'fast':
-        return 1;
-      case 'medium':
-        return 60;
-      case 'slow':
-        return 3600;
-      default:
-        return 10;
-    }
-  }
-
-  function jsUpdatePlant(p, dt) {
-    p.timer += dt;
-    const interval = intervalForSpecies(p.species);
-    while (p.timer >= interval) {
-      p.timer -= interval;
-      p.stage++;
-    }
-  }
-
-  function jsUpdate(dt) {
-    if (!jsPlants) return;
-    jsPlants.forEach(p => jsUpdatePlant(p, dt));
   }
 
   canvas.focus();
@@ -178,14 +150,6 @@ async function start() {
   }
 
   function draw() {
-    const now = performance.now();
-    const dt = (now - lastTime) / 1000;
-    lastTime = now;
-    if (game) {
-      game.update(dt);
-    } else {
-      jsUpdate(dt);
-    }
     if (wasmModule) {
       wasmModule.draw_pink();
     } else {
