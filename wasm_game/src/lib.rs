@@ -93,6 +93,17 @@ impl Game {
         collected
     }
 
+    pub fn plant_index_at(&self, x: f64, y: f64) -> i32 {
+        for (i, (px, py)) in self.plants.iter().enumerate() {
+            let dx = x - *px;
+            let dy = y - *py;
+            if (dx * dx + dy * dy).sqrt() < 20.0 {
+                return i as i32;
+            }
+        }
+        -1
+    }
+
     pub fn player_x(&self) -> f64 { self.player_x }
     pub fn player_y(&self) -> f64 { self.player_y }
     pub fn plant_count(&self) -> usize { self.plants.len() }

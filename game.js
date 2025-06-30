@@ -16,6 +16,12 @@ async function start() {
   let game = null;
   let jsPlants = null;
   let jsCollected = 0;
+  const overlay = document.getElementById('plant-overlay');
+  const plantInfo = [
+    { name: 'Agave', phase: 'Seedling', requirements: 'Full sun, dry soil', desc: 'Una planta resistente que prospera en climas secos.' },
+    { name: 'Maguey', phase: 'Broto', requirements: 'Riego moderado', desc: 'Tradicionalmente usado para producir pulque.' },
+    { name: 'Nopal', phase: 'Maduro', requirements: 'Poca agua, mucho sol', desc: 'Cactácea comestible llena de nutrientes.' }
+  ];
   try {
     const wasm = await import('./wasm_game/pkg/wasm_game.js');
     await wasm.default();
@@ -54,6 +60,19 @@ async function start() {
       }
     }
     return hit;
+  }
+
+  function jsFindPlantAt(x, y) {
+    if (!jsPlants) return -1;
+    for (let i = 0; i < jsPlants.length; i++) {
+      const p = jsPlants[i];
+      const dx = x - p.x;
+      const dy = y - p.y;
+      if (Math.sqrt(dx * dx + dy * dy) < 20) {
+        return i;
+      }
+    }
+    return -1;
   }
 
   function jsCheckCollisions() {
@@ -122,10 +141,27 @@ async function start() {
     dragging = false;
   }
 
+  function showOverlay(index) {
+    const info = plantInfo[index];
+    if (!info) return;
+    overlay.innerHTML = `<h2>${info.name}</h2>` +
+      `<p>Fase actual: ${info.phase}</p>` +
+      `<p>Requisitos: ${info.requirements}</p>` +
+      `<p>${info.desc}</p>`;
+    overlay.style.display = 'block';
+  }
+
+  function hideOverlay() {
+    overlay.style.display = 'none';
+  }
+
   if (window.PointerEvent) {
     canvas.addEventListener('pointerdown', (e) => {
-      const hit = game ? game.collect_at(e.clientX, e.clientY) : jsCollectAt(e.clientX, e.clientY);
-      if (!hit) {
+      const idx = game ? game.plant_index_at(e.clientX, e.clientY) : jsFindPlantAt(e.clientX, e.clientY);
+      if (idx >= 0) {
+        e.stopPropagation();
+        showOverlay(idx);
+      } else {
         startDrag(e.clientX, e.clientY);
         canvas.setPointerCapture(e.pointerId);
       }
@@ -136,8 +172,11 @@ async function start() {
   } else {
     canvas.addEventListener('touchstart', (e) => {
       const t = e.touches[0];
-      const hit = game ? game.collect_at(t.clientX, t.clientY) : jsCollectAt(t.clientX, t.clientY);
-      if (!hit) {
+      const idx = game ? game.plant_index_at(t.clientX, t.clientY) : jsFindPlantAt(t.clientX, t.clientY);
+      if (idx >= 0) {
+        e.stopPropagation();
+        showOverlay(idx);
+      } else {
         startDrag(t.clientX, t.clientY);
       }
     }, { passive: false });
@@ -148,6 +187,12 @@ async function start() {
     canvas.addEventListener('touchend', endDrag);
     canvas.addEventListener('touchcancel', endDrag);
   }
+
+  document.addEventListener('pointerdown', (e) => {
+    if (overlay.style.display === 'block' && !overlay.contains(e.target)) {
+      hideOverlay();
+    }
+  });
 
   function draw() {
     if (wasmModule) {
