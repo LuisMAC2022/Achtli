@@ -1,0 +1,11 @@
+{
+  "name": "achtli",
+  "version": "1.0.0",
+  "description": "Achtli Game",
+  "scripts": {
+    "test": "wasm-pack test --node wasm_game && jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
