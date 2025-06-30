@@ -14,4 +14,4 @@ Automatizar el reemplazo evita olvidos humanos y mantiene las referencias correc
 Podría mejorarse detectando automáticamente el archivo modificado y evitando disparar el flujo dos veces.
 
 ###SHA
-99537b07fa859836e7d81b95f95c9fe582b8ea4e
+87238719d071e65ef579da438a3422f17866de72
