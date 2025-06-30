@@ -12,6 +12,3 @@ El README anterior era escueto y no orientaba a usuarios sin experiencia técnic
 
 ## Sugerencias
 Sería útil añadir un script que automatice la instalación de dependencias y la ejecución de pruebas.
-
-###SHA
-<git SHA>
