@@ -49,29 +49,46 @@ async function start() {
   let lastX = 0;
   let lastY = 0;
 
-  canvas.addEventListener('pointerdown', (e) => {
+  function startDrag(x, y) {
     dragging = true;
-    lastX = e.clientX;
-    lastY = e.clientY;
-    canvas.setPointerCapture(e.pointerId);
-  });
+    lastX = x;
+    lastY = y;
+  }
 
-  canvas.addEventListener('pointermove', (e) => {
+  function moveDrag(x, y) {
     if (!dragging) return;
-    const dx = e.clientX - lastX;
-    const dy = e.clientY - lastY;
-    lastX = e.clientX;
-    lastY = e.clientY;
+    const dx = x - lastX;
+    const dy = y - lastY;
+    lastX = x;
+    lastY = y;
     player.x = Math.max(0, Math.min(canvas.width - player.size, player.x + dx));
     player.y = Math.max(0, Math.min(canvas.height - player.size, player.y + dy));
-  });
+  }
 
   function endDrag() {
     dragging = false;
   }
 
-  canvas.addEventListener('pointerup', endDrag);
-  canvas.addEventListener('pointercancel', endDrag);
+  if (window.PointerEvent) {
+    canvas.addEventListener('pointerdown', (e) => {
+      startDrag(e.clientX, e.clientY);
+      canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointermove', (e) => moveDrag(e.clientX, e.clientY));
+    canvas.addEventListener('pointerup', endDrag);
+    canvas.addEventListener('pointercancel', endDrag);
+  } else {
+    canvas.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      startDrag(t.clientX, t.clientY);
+    }, { passive: false });
+    canvas.addEventListener('touchmove', (e) => {
+      const t = e.touches[0];
+      moveDrag(t.clientX, t.clientY);
+    }, { passive: false });
+    canvas.addEventListener('touchend', endDrag);
+    canvas.addEventListener('touchcancel', endDrag);
+  }
 
   function draw() {
     if (wasmModule) {
