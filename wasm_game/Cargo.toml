@@ -22,3 +22,6 @@ default = ["wee_alloc"]
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = false
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3"

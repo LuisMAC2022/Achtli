@@ -111,3 +111,29 @@ impl Game {
         arr
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use wasm_bindgen_test::*;
+
+
+    #[wasm_bindgen_test]
+    fn move_player_bounds() {
+        let mut game = Game::new(100.0, 100.0);
+        game.move_player(200.0, -50.0);
+        assert_eq!(game.player_x(), 100.0);
+        assert_eq!(game.player_y(), 0.0);
+    }
+
+    #[wasm_bindgen_test]
+    fn collect_at_removes_plant() {
+        let mut game = Game::new(100.0, 100.0);
+        let x = game.plant_x(0);
+        let y = game.plant_y(0);
+        let initial = game.plant_count();
+        assert!(game.collect_at(x, y));
+        assert_eq!(game.plant_count(), initial - 1);
+        assert_eq!(game.collected(), 1);
+    }
+}
