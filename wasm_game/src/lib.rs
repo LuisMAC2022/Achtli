@@ -1,6 +1,25 @@
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsValue;
 use js_sys::Array;
+use wasm_bindgen::JsCast;
+use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, window};
+
+#[wasm_bindgen]
+pub fn draw_pink() -> Result<(), JsValue> {
+    let document = window().unwrap().document().unwrap();
+    let canvas = document.get_element_by_id("game").unwrap();
+    let canvas: HtmlCanvasElement = canvas.dyn_into()?;
+    let ctx = canvas
+        .get_context("2d")?
+        .unwrap()
+        .dyn_into::<CanvasRenderingContext2d>()?;
+    #[allow(deprecated)]
+    ctx.set_fill_style(&JsValue::from_str("pink"));
+    let width = canvas.width() as f64;
+    let height = canvas.height() as f64;
+    ctx.fill_rect(0.0, 0.0, width, height);
+    Ok(())
+}
 
 #[cfg(feature = "wee_alloc")]
 #[global_allocator]
