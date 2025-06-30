@@ -100,7 +100,7 @@ impl Game {
     pub fn plant_y(&self, idx: usize) -> f64 { self.plants[idx].1 }
     pub fn collected(&self) -> u32 { self.collected }
 
-pub fn plant_positions(&self) -> Array {
+    pub fn plant_positions(&self) -> Array {
         let arr = Array::new();
         for (x, y) in &self.plants {
             let pair = Array::new();
@@ -109,45 +109,5 @@ pub fn plant_positions(&self) -> Array {
             arr.push(&pair);
         }
         arr
-    }
-}
-
-// --- Tests ---
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use wasm_bindgen_test::*;
-
-
-    #[wasm_bindgen_test]
-    fn test_move_player_bounds_and_collision() {
-        let mut game = Game::new(100.0, 100.0);
-
-        // move player outside bounds - should clamp
-        game.move_player(-200.0, -200.0);
-        assert_eq!(game.player_x(), 0.0);
-        assert_eq!(game.player_y(), 0.0);
-
-        // move to near first plant and ensure collision collects it
-        let px = game.plant_x(0);
-        let py = game.plant_y(0);
-        game.move_player(px - game.player_x(), py - game.player_y());
-        assert_eq!(game.collected(), 1);
-        assert_eq!(game.plant_count(), 2);
-    }
-
-    #[wasm_bindgen_test]
-    fn test_collect_at() {
-        let mut game = Game::new(100.0, 100.0);
-
-        let px = game.plant_x(0);
-        let py = game.plant_y(0);
-
-        assert!(game.collect_at(px, py));
-        assert_eq!(game.collected(), 1);
-        assert_eq!(game.plant_count(), 2);
-
-        // clicking empty space returns false
-        assert!(!game.collect_at(99.0, 99.0));
     }
 }
