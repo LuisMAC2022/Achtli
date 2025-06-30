@@ -75,6 +75,24 @@ impl Game {
         }
     }
 
+    pub fn collect_at(&mut self, x: f64, y: f64) -> bool {
+        let mut i = 0;
+        let mut collected = false;
+        while i < self.plants.len() {
+            let (px, py) = self.plants[i];
+            let dx = x - px;
+            let dy = y - py;
+            if (dx * dx + dy * dy).sqrt() < 20.0 {
+                self.plants.remove(i);
+                self.collected += 1;
+                collected = true;
+            } else {
+                i += 1;
+            }
+        }
+        collected
+    }
+
     pub fn player_x(&self) -> f64 { self.player_x }
     pub fn player_y(&self) -> f64 { self.player_y }
     pub fn plant_count(&self) -> usize { self.plants.len() }
