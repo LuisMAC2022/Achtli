@@ -59,6 +59,9 @@ async function start() {
     console.warn('WASM failed, falling back to JS implementation', e);
     game = new JsGame(canvas.width, canvas.height);
   }
+  
+  canvas.focus();
+
 
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -78,18 +81,22 @@ async function start() {
     requestAnimationFrame(draw);
   }
 
-  document.addEventListener('keydown', (e) => {
+  canvas.addEventListener('keydown', (e) => {
     switch (e.key) {
       case 'ArrowUp':
+        e.preventDefault();
         game.move_player(0, -5);
         break;
       case 'ArrowDown':
+        e.preventDefault();
         game.move_player(0, 5);
         break;
       case 'ArrowLeft':
+        e.preventDefault();
         game.move_player(-5, 0);
         break;
       case 'ArrowRight':
+        e.preventDefault();
         game.move_player(5, 0);
         break;
     }
