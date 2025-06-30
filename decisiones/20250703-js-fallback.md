@@ -13,5 +13,3 @@ Al no compilar el paquete `wasm_game` el sitio sólo mostraba un cuadro negro. C
 ## Sugerencias
 Automatizar la compilación localmente y ampliar las pruebas de accesibilidad.
 
-###SHA
-0a5088f5201a2413931f4c2c1de51aee22f8de3a

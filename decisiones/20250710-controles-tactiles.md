@@ -13,5 +13,3 @@ Estas mejoras permiten controlar el juego en dispositivos moviles sin desplazami
 ## Sugerencias
 Se podria añadir retroalimentacion visual al tocar el lienzo y ajustar la sensibilidad del arrastre.
 
-###SHA
-0a5088f5201a2413931f4c2c1de51aee22f8de3a

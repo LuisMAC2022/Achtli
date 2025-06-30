@@ -13,5 +13,3 @@ Sin esta hoja de estilos, el navegador ignoraba la desactivacion de gestos táct
 ## Sugerencias
 Seria conveniente revisar periodicamente que las paginas incluyan los estilos necesarios y evitar duplicaciones.
 
-###SHA
-bc829502d541630d9a034b44e22af85808ae70eb

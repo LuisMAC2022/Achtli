@@ -13,5 +13,3 @@ Mantener los SHA correctos facilita rastrear en qué commit se introdujo cada ca
 ## Sugerencias
 Este proceso podría automatizarse con un script que actualice los archivos de decisiones al cerrar el PR.
 
-###SHA
-9aa542417e6f7ef2b5d161db3c29d070d184093c
