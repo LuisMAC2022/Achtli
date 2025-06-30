@@ -13,5 +13,3 @@ Vincular la lógica de Rust con el código JavaScript simplifica la administraci
 ## Sugerencias
 Faltan efectos visuales al recolectar plantas y más pruebas de interacción táctil para pulir la experiencia.
 
-###SHA
-87238719d071e65ef579da438a3422f17866de72

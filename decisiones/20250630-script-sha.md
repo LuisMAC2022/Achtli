@@ -13,5 +13,3 @@ Automatizar la sustitucion evita olvidos y garantiza que las referencias a commi
 ## Sugerencias
 El script podria ejecutarse como parte de un flujo de GitHub Actions al fusionar PR para mantener todo automatizado.
 
-###SHA
-0a5088f5201a2413931f4c2c1de51aee22f8de3a

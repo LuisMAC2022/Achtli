@@ -13,5 +13,3 @@ El prototipo solo dibujaba un fondo rosa sin interacción. Con el cuadrado contr
 ## Sugerencias
 El movimiento podría ampliarse para incluir límites más suaves y animaciones. También conviene revisar la compatibilidad con dispositivos móviles.
 
-###SHA
-0a5088f5201a2413931f4c2c1de51aee22f8de3a

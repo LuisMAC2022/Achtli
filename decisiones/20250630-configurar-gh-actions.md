@@ -13,5 +13,3 @@ Es necesario automatizar la generación y despliegue del videojuego y la página
 ## Sugerencias
 La configuración podría ampliarse para ejecutar pruebas automáticas y publicar artefactos del juego. Futuras mejoras pueden incluir manejo de versiones y deploy condicional según entornos.
 
-###SHA
-a17deced6d728dca2277ad02178b3f9656bc84b9
