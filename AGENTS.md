@@ -18,10 +18,24 @@ A continuación se describen los roles esperados para los distintos agentes que 
 - Proponer sistemas que fortalezcan la historia, la jugabilidad y el impacto social del proyecto.
 
 ## Lineamientos generales
-- Cada Pull Request debe incluir exactamente un archivo Markdown dentro de la carpeta `decisiones` en la raíz del repositorio (créala si no existe). El nombre del archivo sigue el formato `YYYYMMDD-titulo-breve.md`.
-- Ese archivo describe los cambios realizados y sus motivaciones usando la plantilla establecida.
-- No se deben incluir credenciales ni datos sensibles.
-- Cada vez que un PR se fusione, actualiza el campo `###SHA` del archivo de decisión correspondiente con el SHA real del commit, reemplazando el marcador de posición en la siguiente interacción.
-- Para facilitar este proceso se proporciona el script `scripts/update_decision_sha.sh`.
-- El workflow `.github/workflows/build.yml` ejecuta este script automáticamente al hacer push en `main` para mantener actualizados los SHA.
-  Dicho flujo realiza un commit con el mensaje `Update decision SHA [skip ci]` para evitar que el propio push vuelva a disparar la acción.
+- Cada Pull Request debe agregar un archivo Markdown en la carpeta `decisiones` con nombre `YYYYMMDD-titulo-breve.md`.
+- El contenido de ese archivo sigue esta plantilla:
+
+  ```markdown
+  # Título breve
+
+  ## Resumen
+  Breve descripción del cambio propuesto.
+
+  ## Razonamiento
+  Motivos para realizar el cambio.
+
+  ## Alternativas consideradas
+  - Opción 1
+  - Opción 2
+
+  ## Sugerencias
+  Posibles mejoras o pasos futuros.
+  ```
+
+- No se deben incluir credenciales ni datos sensibles en los PR.
