@@ -27,4 +27,17 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
+      - name: Update decision SHA
+        run: |
+          files=$(grep -rl '<<git SHA>>' decisiones/*.md || true)
+          if [ -n "$files" ]; then
+            for f in $files; do
+              bash scripts/update_decision_sha.sh "$f" $GITHUB_SHA
+            done
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git add $files
+            git commit -m "Update decision SHA [skip ci]" || echo "No changes to commit"
+            git push
+          fi
 
