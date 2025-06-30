@@ -14,4 +14,4 @@ El bot `github-actions` necesita permiso de escritura para poder actualizar los 
 Revisar si otros flujos requieren permisos similares para evitar fallos en futuras automatizaciones.
 
 ###SHA
-<<git SHA>>
+0a5088f5201a2413931f4c2c1de51aee22f8de3a

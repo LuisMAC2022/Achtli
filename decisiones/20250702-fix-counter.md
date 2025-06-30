@@ -14,4 +14,4 @@ El contador no se actualizaba porque el script buscaba un elemento `id="count"` 
 El prototipo debería incluir pruebas automáticas de compilación para detectar este tipo de errores. También convendría documentar cómo ejecutar `wasm-pack` sin optimización.
 
 ###SHA
-<<git SHA>>
+0a5088f5201a2413931f4c2c1de51aee22f8de3a

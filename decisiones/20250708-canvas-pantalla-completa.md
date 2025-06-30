@@ -14,4 +14,4 @@ El prototipo mostraba el lienzo con un tamaño fijo de 300x200 píxeles, lo que 
 Podrían añadirse controles para pausar o reescalar el juego tras cambiar el tamaño de la ventana.
 
 ###SHA
-<<git SHA>>
+0a5088f5201a2413931f4c2c1de51aee22f8de3a

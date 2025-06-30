@@ -14,4 +14,4 @@ El paso que sustituye `<<git SHA>>` no se ejecutaba si fallaba la construcción 
 Revisar de forma periódica el flujo para detectar pasos redundantes y mantenerlo lo más simple posible.
 
 ###SHA
-<<git SHA>>
+0a5088f5201a2413931f4c2c1de51aee22f8de3a

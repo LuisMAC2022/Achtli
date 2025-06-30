@@ -14,4 +14,4 @@ Usuarios reportaron que las flechas no desplazaban al personaje. Al escuchar los
 Debería añadirse soporte para dispositivos táctiles y más pruebas de accesibilidad.
 
 ###SHA
-<<git SHA>>
+0a5088f5201a2413931f4c2c1de51aee22f8de3a

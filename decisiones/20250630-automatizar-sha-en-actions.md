@@ -14,4 +14,4 @@ Automatizar el reemplazo evita olvidos humanos y mantiene las referencias correc
 Podría mejorarse detectando automáticamente el archivo modificado y evitando disparar el flujo dos veces.
 
 ###SHA
-<<git SHA>>
+0a5088f5201a2413931f4c2c1de51aee22f8de3a
