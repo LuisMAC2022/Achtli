@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Achtli Game Prototype</title>
+  <script type="module" src="game.js"></script>
+  <style>
+    body { margin: 0; }
+    #counter {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      color: white;
+      background: rgba(0,0,0,0.5);
+      padding: 4px 8px;
+      font-family: sans-serif;
+    }
+    canvas { background: #222; display:block; margin:0 auto; }
+  </style>
+</head>
+<body>
+  <div id="counter">0</div>
+  <canvas id="game" width="300" height="200"></canvas>
+</body>
+</html>
