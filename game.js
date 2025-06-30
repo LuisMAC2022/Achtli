@@ -25,9 +25,9 @@ async function start() {
   } catch (e) {
     console.warn('WASM failed, drawing pink with JS', e);
     jsPlants = [
-      { species: 0, stage: 0, timer: 0, x: 50, y: 50 },
-      { species: 1, stage: 0, timer: 0, x: 150, y: 80 },
-      { species: 2, stage: 0, timer: 0, x: 80, y: 150 }
+      { x: 50, y: 50 },
+      { x: 150, y: 80 },
+      { x: 80, y: 150 }
     ];
   }
 
@@ -36,7 +36,6 @@ async function start() {
   const speed = 5;
   const counter = document.getElementById('counter');
   let lastCollected = 0;
-  let lastTime = performance.now();
 
   function jsCollectAt(x, y) {
     if (!jsPlants) return false;
@@ -59,27 +58,6 @@ async function start() {
 
   function jsCheckCollisions() {
     jsCollectAt(player.x + playerSize / 2, player.y + playerSize / 2);
-  }
-
-  function growthInterval(species) {
-    switch (species) {
-      case 0:
-        return 1; // seconds
-      case 1:
-        return 60; // minutes
-      case 2:
-        return 3600; // hours
-      default:
-        return 1;
-    }
-  }
-
-  function updatePlant(p, dt) {
-    p.timer += dt;
-    if (p.timer >= growthInterval(p.species)) {
-      p.timer = 0;
-      if (p.stage < 3) p.stage++;
-    }
   }
 
   canvas.focus();
@@ -172,10 +150,6 @@ async function start() {
   }
 
   function draw() {
-    const now = performance.now();
-    const dt = (now - lastTime) / 1000;
-    lastTime = now;
-
     if (wasmModule) {
       wasmModule.draw_pink();
     } else {
@@ -184,11 +158,10 @@ async function start() {
     }
 
     if (game) {
-      game.update(dt);
-      const data = game.plant_data();
+      const positions = game.plant_positions();
       ctx.fillStyle = 'green';
-      for (let i = 0; i < data.length; i++) {
-        const [x, y] = data[i];
+      for (let i = 0; i < positions.length; i++) {
+        const [x, y] = positions[i];
         ctx.beginPath();
         ctx.arc(x, y, 10, 0, Math.PI * 2);
         ctx.fill();
@@ -201,9 +174,6 @@ async function start() {
       ctx.fillStyle = 'blue';
       ctx.fillRect(game.player_x(), game.player_y(), playerSize, playerSize);
     } else {
-      for (let i = 0; i < jsPlants.length; i++) {
-        updatePlant(jsPlants[i], dt);
-      }
       if (jsPlants) {
         ctx.fillStyle = 'green';
         for (let i = 0; i < jsPlants.length; i++) {
