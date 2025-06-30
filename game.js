@@ -14,6 +14,8 @@ async function start() {
 
   let wasmModule = null;
   let game = null;
+  let jsPlants = null;
+  let jsCollected = 0;
   try {
     const wasm = await import('./wasm_game/pkg/wasm_game.js');
     await wasm.default();
@@ -22,6 +24,11 @@ async function start() {
     game = new wasm.Game(canvas.width, canvas.height);
   } catch (e) {
     console.warn('WASM failed, drawing pink with JS', e);
+    jsPlants = [
+      { x: 50, y: 50 },
+      { x: 150, y: 80 },
+      { x: 80, y: 150 }
+    ];
   }
 
   const playerSize = 20;
@@ -29,6 +36,29 @@ async function start() {
   const speed = 5;
   const counter = document.getElementById('counter');
   let lastCollected = 0;
+
+  function jsCollectAt(x, y) {
+    if (!jsPlants) return false;
+    let i = 0;
+    let hit = false;
+    while (i < jsPlants.length) {
+      const p = jsPlants[i];
+      const dx = x - p.x;
+      const dy = y - p.y;
+      if (Math.sqrt(dx * dx + dy * dy) < 20) {
+        jsPlants.splice(i, 1);
+        jsCollected++;
+        hit = true;
+      } else {
+        i++;
+      }
+    }
+    return hit;
+  }
+
+  function jsCheckCollisions() {
+    jsCollectAt(player.x + playerSize / 2, player.y + playerSize / 2);
+  }
 
   canvas.focus();
   canvas.addEventListener('keydown', (e) => {
@@ -59,6 +89,7 @@ async function start() {
     } else {
       player.x = Math.max(0, Math.min(canvas.width - playerSize, player.x + dx));
       player.y = Math.max(0, Math.min(canvas.height - playerSize, player.y + dy));
+      jsCheckCollisions();
     }
   });
 
@@ -83,6 +114,7 @@ async function start() {
     } else {
       player.x = Math.max(0, Math.min(canvas.width - playerSize, player.x + dx));
       player.y = Math.max(0, Math.min(canvas.height - playerSize, player.y + dy));
+      jsCheckCollisions();
     }
   }
 
@@ -92,8 +124,11 @@ async function start() {
 
   if (window.PointerEvent) {
     canvas.addEventListener('pointerdown', (e) => {
-      startDrag(e.clientX, e.clientY);
-      canvas.setPointerCapture(e.pointerId);
+      const hit = game ? game.collect_at(e.clientX, e.clientY) : jsCollectAt(e.clientX, e.clientY);
+      if (!hit) {
+        startDrag(e.clientX, e.clientY);
+        canvas.setPointerCapture(e.pointerId);
+      }
     });
     canvas.addEventListener('pointermove', (e) => moveDrag(e.clientX, e.clientY));
     canvas.addEventListener('pointerup', endDrag);
@@ -101,7 +136,10 @@ async function start() {
   } else {
     canvas.addEventListener('touchstart', (e) => {
       const t = e.touches[0];
-      startDrag(t.clientX, t.clientY);
+      const hit = game ? game.collect_at(t.clientX, t.clientY) : jsCollectAt(t.clientX, t.clientY);
+      if (!hit) {
+        startDrag(t.clientX, t.clientY);
+      }
     }, { passive: false });
     canvas.addEventListener('touchmove', (e) => {
       const t = e.touches[0];
@@ -136,6 +174,19 @@ async function start() {
       ctx.fillStyle = 'blue';
       ctx.fillRect(game.player_x(), game.player_y(), playerSize, playerSize);
     } else {
+      if (jsPlants) {
+        ctx.fillStyle = 'green';
+        for (let i = 0; i < jsPlants.length; i++) {
+          const p = jsPlants[i];
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 10, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      if (jsCollected !== lastCollected) {
+        counter.textContent = jsCollected;
+        lastCollected = jsCollected;
+      }
       ctx.fillStyle = 'blue';
       ctx.fillRect(player.x, player.y, playerSize, playerSize);
     }
