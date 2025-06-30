@@ -14,4 +14,4 @@ Los enlaces y parrafos mal cerrados podian romper la estructura de la pagina y a
 Fue simple localizar los cierres erróneos con `sed`. A futuro, integrar un validador HTML automatico ayudaria a prevenir regresiones.
 
 ###SHA
-<<git SHA>>
+99537b07fa859836e7d81b95f95c9fe582b8ea4e
