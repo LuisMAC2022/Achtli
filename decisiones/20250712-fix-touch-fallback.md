@@ -14,4 +14,4 @@ Usuarios reportaron que el arrastre no funcionaba en algunos móviles. Detectamo
 Realizar pruebas en más dispositivos y evaluar ajustes de sensibilidad. Podría estudiarse un sistema de controles virtuales para mayor accesibilidad.
 
 ###SHA
-<<git SHA>>
+80f21844981081b3fdabb43e16371db2c71529eb
