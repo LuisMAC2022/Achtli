@@ -14,4 +14,4 @@ El README ahora orienta sobre la relación entre Rust y JavaScript, facilitando 
 El doble mantenimiento podría simplificarse con pruebas compartidas o herramientas de generación de código.
 
 ###SHA
-<<git SHA>>
+e61d032809348b2068bdd262fbfeb19a05c0b21b
