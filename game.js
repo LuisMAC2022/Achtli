@@ -20,7 +20,7 @@ async function start() {
       ctx.fill();
     }
 
-    document.getElementById('count').textContent = game.collected();
+    document.getElementById('counter').textContent = game.collected();
     requestAnimationFrame(draw);
   }
 
