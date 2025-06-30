@@ -32,12 +32,12 @@ Asegúrate de tener las herramientas básicas para compilar el módulo WebAssemb
 Si la compilación no está disponible, el juego utiliza automáticamente una versión en JavaScript como respaldo.
 
 ## Pruebas automáticas
-Próximamente se añadirá una suite de pruebas para validar el código. Una vez que exista podrás ejecutarla con:
+El repositorio ya cuenta con pruebas en **Rust** y **JavaScript**. Puedes ejecutarlas con:
 ```bash
-cargo test       # para las pruebas de Rust
-npm test         # para las pruebas de JavaScript
+cargo test       # pruebas de Rust
+npm test         # pruebas de JS y wasm (requiere wasm-pack)
 ```
-Las pruebas automatizadas ejecutan pequeños programas que verifican que cada parte del proyecto funcione como se espera. Esto ayuda a detectar errores antes de publicar los cambios y se ejecutará de forma automática en GitHub Actions cuando envíes código al repositorio.
+Asegúrate de que `wasm-pack` esté instalado y disponible en tu `PATH`, ya que `npm test` lo utiliza para compilar y ejecutar la biblioteca WebAssembly. Las pruebas automatizadas verifican que cada parte del proyecto funcione como se espera y se ejecutarán también en GitHub Actions cuando envíes código al repositorio.
 
 Si la compilación no está disponible, el juego utiliza una versión en JavaScript puro como respaldo.
 
