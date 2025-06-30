@@ -12,42 +12,7 @@ jobs:
       # 1) Clona el repositorio
       - uses: actions/checkout@v4
 
-      # 2) Instala Rust (estable)
-      - uses: actions-rust-lang/setup-rust-toolchain@v1
-        with:
-          toolchain: stable
-
-      # 3) Instala Node 20
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # 4) Instala wasm-pack
-      - name: Install wasm-pack
-        run: curl -sSf https://rustwasm.github.io/wasm-pack/installer/init.sh | sh
-
-      # 5) Compila tu paquete WebAssembly
-      - name: Build wasm package
-        run: wasm-pack build --target web wasm_game
-
-      # 6) Instala Ruby, Bundler y las gemas (incluido Jekyll)
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'     # o la versión que prefieras
-          bundler-cache: true     # ejecuta bundle install y guarda caché
-
-      # 7) Construye el sitio Jekyll
-      - name: Build Jekyll site
-        run: bundle exec jekyll build --trace
-
-      # 8) Despliega en GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-
-      # 9) Sustituye <<git SHA>> en tus decisiones
+      # 2) Sustituye <<git SHA>> en tus decisiones
       - name: Update decision SHA
         run: |
           files=$(grep -rl '<<git SHA>>' decisiones/*.md || true)
@@ -61,3 +26,29 @@ jobs:
             git commit -m "Update decision SHA [skip ci]" || echo "No changes to commit"
             git push origin main
           fi
+
+      # 3) Instala Rust (estable)
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: stable
+
+      # 4) Instala Node 20
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 5) Instala wasm-pack
+      - name: Install wasm-pack
+        run: curl -sSf https://rustwasm.github.io/wasm-pack/installer/init.sh | sh
+
+      # 6) Compila tu paquete WebAssembly
+      - name: Build wasm package
+        run: wasm-pack build --target web wasm_game
+
+      # 7) Despliega en GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+
