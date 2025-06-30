@@ -1,12 +1,8 @@
-use js_sys::Array;
 use wasm_bindgen::prelude::*;
-use wasm_bindgen::JsCast;
 use wasm_bindgen::JsValue;
-use web_sys::{window, CanvasRenderingContext2d, HtmlCanvasElement};
-
-mod growth;
-mod plant;
-use plant::Plant;
+use js_sys::Array;
+use wasm_bindgen::JsCast;
+use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, window};
 
 #[wasm_bindgen]
 pub fn draw_pink() -> Result<(), JsValue> {
@@ -35,7 +31,7 @@ pub struct Game {
     height: f64,
     player_x: f64,
     player_y: f64,
-    plants: Vec<Plant>,
+    plants: Vec<(f64, f64)>,
     collected: u32,
 }
 
@@ -44,9 +40,9 @@ impl Game {
     #[wasm_bindgen(constructor)]
     pub fn new(width: f64, height: f64) -> Game {
         let plants = vec![
-            Plant::new("fast", 50.0, 50.0),
-            Plant::new("medium", 150.0, 80.0),
-            Plant::new("slow", 80.0, 150.0),
+            (50.0, 50.0),
+            (150.0, 80.0),
+            (80.0, 150.0),
         ];
         Game {
             width,
@@ -55,12 +51,6 @@ impl Game {
             player_y: height / 2.0,
             plants,
             collected: 0,
-        }
-    }
-
-    pub fn update(&mut self, dt: f64) {
-        for plant in &mut self.plants {
-            growth::update(plant, dt);
         }
     }
 
@@ -73,8 +63,7 @@ impl Game {
     fn check_collisions(&mut self) {
         let mut i = 0;
         while i < self.plants.len() {
-            let px = self.plants[i].x;
-            let py = self.plants[i].y;
+            let (px, py) = self.plants[i];
             let dx = self.player_x - px;
             let dy = self.player_y - py;
             if (dx * dx + dy * dy).sqrt() < 20.0 {
@@ -90,8 +79,7 @@ impl Game {
         let mut i = 0;
         let mut collected = false;
         while i < self.plants.len() {
-            let px = self.plants[i].x;
-            let py = self.plants[i].y;
+            let (px, py) = self.plants[i];
             let dx = x - px;
             let dy = y - py;
             if (dx * dx + dy * dy).sqrt() < 20.0 {
@@ -105,31 +93,19 @@ impl Game {
         collected
     }
 
-    pub fn player_x(&self) -> f64 {
-        self.player_x
-    }
-    pub fn player_y(&self) -> f64 {
-        self.player_y
-    }
-    pub fn plant_count(&self) -> usize {
-        self.plants.len()
-    }
-    pub fn plant_x(&self, idx: usize) -> f64 {
-        self.plants[idx].x
-    }
-    pub fn plant_y(&self, idx: usize) -> f64 {
-        self.plants[idx].y
-    }
-    pub fn collected(&self) -> u32 {
-        self.collected
-    }
+    pub fn player_x(&self) -> f64 { self.player_x }
+    pub fn player_y(&self) -> f64 { self.player_y }
+    pub fn plant_count(&self) -> usize { self.plants.len() }
+    pub fn plant_x(&self, idx: usize) -> f64 { self.plants[idx].0 }
+    pub fn plant_y(&self, idx: usize) -> f64 { self.plants[idx].1 }
+    pub fn collected(&self) -> u32 { self.collected }
 
     pub fn plant_positions(&self) -> Array {
         let arr = Array::new();
-        for plant in &self.plants {
+        for (x, y) in &self.plants {
             let pair = Array::new();
-            pair.push(&JsValue::from_f64(plant.x));
-            pair.push(&JsValue::from_f64(plant.y));
+            pair.push(&JsValue::from_f64(*x));
+            pair.push(&JsValue::from_f64(*y));
             arr.push(&pair);
         }
         arr
@@ -140,6 +116,7 @@ impl Game {
 mod tests {
     use super::*;
     use wasm_bindgen_test::*;
+
 
     #[wasm_bindgen_test]
     fn move_player_bounds() {
