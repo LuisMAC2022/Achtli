@@ -45,6 +45,34 @@ async function start() {
     }
   });
 
+  let dragging = false;
+  let lastX = 0;
+  let lastY = 0;
+
+  canvas.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    canvas.setPointerCapture(e.pointerId);
+  });
+
+  canvas.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+    player.x = Math.max(0, Math.min(canvas.width - player.size, player.x + dx));
+    player.y = Math.max(0, Math.min(canvas.height - player.size, player.y + dy));
+  });
+
+  function endDrag() {
+    dragging = false;
+  }
+
+  canvas.addEventListener('pointerup', endDrag);
+  canvas.addEventListener('pointercancel', endDrag);
+
   function draw() {
     if (wasmModule) {
       wasmModule.draw_pink();
