@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-rust@v1
+      - uses: rust-lang/setup-rust@v1
         with:
           rust-version: stable
       - uses: actions/setup-node@v4
