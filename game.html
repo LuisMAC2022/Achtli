@@ -15,11 +15,17 @@
       padding: 4px 8px;
       font-family: sans-serif;
     }
-    canvas { background: #222; display:block; margin:0 auto; }
+    canvas {
+      background: #222;
+      display: block;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+    }
   </style>
 </head>
 <body>
   <div id="counter">0</div>
-  <canvas id="game" width="300" height="200" aria-label="Juego en desarrollo" tabindex="0"></canvas>
+  <canvas id="game" aria-label="Juego en desarrollo" tabindex="0"></canvas>
 </body>
 </html>
