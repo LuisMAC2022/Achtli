@@ -1,4 +1,11 @@
-const { jsCollectAt, MATURE_STAGE } = require('../game_logic');
+let jsCollectAt;
+let MATURE_STAGE;
+
+beforeAll(async () => {
+  const mod = await import('../js/game-logic.js');
+  jsCollectAt = mod.jsCollectAt;
+  MATURE_STAGE = mod.MATURE_STAGE;
+});
 
 test('collects a mature plant when coordinates match', () => {
   const plants = [{ x: 10, y: 10, stage: MATURE_STAGE }];
