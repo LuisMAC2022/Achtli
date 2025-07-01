@@ -1,7 +1,0 @@
-/home/runner/work/Achtli/Achtli/wasm_game/target/wasm32-unknown-unknown/release/deps/js_sys-c50fb1a0214e918c.d: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.77/src/lib.rs
-
-/home/runner/work/Achtli/Achtli/wasm_game/target/wasm32-unknown-unknown/release/deps/libjs_sys-c50fb1a0214e918c.rlib: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.77/src/lib.rs
-
-/home/runner/work/Achtli/Achtli/wasm_game/target/wasm32-unknown-unknown/release/deps/libjs_sys-c50fb1a0214e918c.rmeta: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.77/src/lib.rs
-
-/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/js-sys-0.3.77/src/lib.rs:

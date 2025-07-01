@@ -4,27 +4,27 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Videojuego ambiental y documentación del proyecto">
+        
         <meta name="author" content="Proyecto Achtli">
         
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Achtli</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/fontawesome.min.css" rel="stylesheet">
-        <link href="css/brands.min.css" rel="stylesheet">
-        <link href="css/solid.min.css" rel="stylesheet">
-        <link href="css/v4-font-face.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Decisiones - Achtli</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../css/brands.min.css" rel="stylesheet">
+        <link href="../css/solid.min.css" rel="stylesheet">
+        <link href="../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
         <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Achtli</a>
+                <a class="navbar-brand" href="..">Achtli</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,10 +35,10 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a href="." class="nav-link active" aria-current="page">Inicio</a>
+                                <a href=".." class="nav-link">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a href="decisiones/" class="nav-link">Decisiones</a>
+                                <a href="./" class="nav-link active" aria-current="page">Decisiones</a>
                             </li>
                         </ul>
 
@@ -49,17 +49,17 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href=".." class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="decisiones/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/LuisMAC2022/Achtli/edit/master/docs/index.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                                <a href="https://github.com/LuisMAC2022/Achtli/edit/master/docs/decisiones.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -79,24 +79,8 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#achtli" class="nav-link">Achtli</a>
+            <li class="nav-item" data-bs-level="1"><a href="#registros-de-decisiones" class="nav-link">Registros de decisiones</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#instalacion" class="nav-link">Instalación</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#ejecutar-el-prototipo" class="nav-link">Ejecutar el prototipo</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#pruebas-automaticas" class="nav-link">Pruebas automáticas</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-bs-level="2"><a href="#respaldo-en-javascript" class="nav-link">Respaldo en JavaScript</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -104,56 +88,44 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="achtli">Achtli</h1>
-<p>Este es un proyecto que busca recuperar la memoria mexica por medio del rescate al medio ambiente.</p>
-<h2 id="instalacion">Instalación</h2>
-<p>Asegúrate de tener las herramientas básicas para compilar el módulo WebAssembly y ejecutar el prototipo.</p>
-<ol>
-<li><strong>Instalar Rust</strong></li>
-<li>Visita <a href="https://www.rust-lang.org/tools/install">https://www.rust-lang.org/tools/install</a> y sigue las instrucciones.</li>
-<li>En la mayoría de los sistemas puedes ejecutar:
-     <code>bash
-     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh</code></li>
-<li>Comprueba que Rust quedó listo con <code>rustc --version</code>.</li>
-<li><strong>Instalar Node.js</strong></li>
-<li>Descarga la versión LTS desde <a href="https://nodejs.org/">https://nodejs.org/</a> o usa el gestor de paquetes de tu sistema.</li>
-<li>Verifica la instalación con <code>node --version</code>.</li>
-<li><strong>Instalar wasm-pack</strong></li>
-<li>Con Rust ya instalado ejecuta:
-     <code>bash
-     curl -sSf https://rustwasm.github.io/wasm-pack/installer/init.sh | sh</code></li>
-<li>Comprueba que el comando <code>wasm-pack</code> funciona ejecutando <code>wasm-pack --version</code>.</li>
-</ol>
-<h2 id="ejecutar-el-prototipo">Ejecutar el prototipo</h2>
-<ol>
-<li>Genera los archivos WebAssembly:
-   <code>bash
-   wasm-pack build --target web wasm_game</code></li>
-<li>Abre <code>game.html</code> en un navegador moderno. Puedes hacerlo directamente o sirviendo la carpeta con un pequeño servidor web.</li>
-<li>Usa las flechas del teclado o los controles táctiles para mover al personaje.</li>
-</ol>
-<p>Si la compilación no está disponible, el juego utiliza automáticamente una versión en JavaScript como respaldo.</p>
-<h2 id="pruebas-automaticas">Pruebas automáticas</h2>
-<p>El repositorio ya cuenta con pruebas en <strong>Rust</strong> y <strong>JavaScript</strong>. Puedes ejecutarlas con:</p>
-<pre><code class="language-bash">cargo test       # pruebas de Rust
-npm test         # pruebas de JS y wasm (requiere wasm-pack)
-</code></pre>
-<p>Asegúrate de que <code>wasm-pack</code> esté instalado y disponible en tu <code>PATH</code>, ya que <code>npm test</code> lo utiliza para compilar y ejecutar la biblioteca WebAssembly. Las pruebas automatizadas verifican que cada parte del proyecto funcione como se espera y se ejecutarán también en GitHub Actions cuando envíes código al repositorio.</p>
-<p>Si la compilación no está disponible, el juego utiliza una versión en JavaScript puro como respaldo.</p>
-<h2 id="respaldo-en-javascript">Respaldo en JavaScript</h2>
-<p>El archivo <code>game.js</code> replica la misma mecánica implementada en Rust para <code>wasm_game</code>.  Mueve al personaje,
-detecta colisiones y lleva el conteo de plantas igual que la biblioteca WebAssembly.  Así el título sigue
-funcionando si el módulo wasm falla o no se compila.</p>
-<p>Para mantener la coherencia, actualiza el código JavaScript y el Rust al mismo tiempo cada que
-modifiques la lógica del juego.  Conserva la misma interfaz pública y verifica el comportamiento en ambos
-entornos para evitar divergencias.</p>
-<h3 id="ventaja-o-desventaja">¿Ventaja o desventaja?</h3>
-<p>Tener dos implementaciones ayuda a depurar y garantiza accesibilidad, pero duplica el esfuerzo de
-mantenimiento.  Decide si conservar el espejo en JS según el tiempo disponible y la utilidad que aporte.</p>
-<p>Abre <code>game.html</code> en un navegador moderno y usa las flechas para mover al personaje.</p>
-<p>cambios por añadir:</p>
-<p>-&gt; sustituir imagenes de baja resolucion con mapas de google (falta creacion de api de google)
--&gt; asegurarse que el diseño sea accesible</p></div>
+<h1 id="registros-de-decisiones">Registros de decisiones</h1>
+<p>La siguiente lista incluye los archivos en la carpeta <code>decisiones</code>.</p>
+<ul>
+<li><a href="../decisiones/20250630-actualizar-sha.md">20250630-actualizar-sha.md</a></li>
+<li><a href="../decisiones/20250630-automatizar-sha-en-actions.md">20250630-automatizar-sha-en-actions.md</a></li>
+<li><a href="../decisiones/20250630-configurar-gh-actions.md">20250630-configurar-gh-actions.md</a></li>
+<li><a href="../decisiones/20250630-crear-agents.md">20250630-crear-agents.md</a></li>
+<li><a href="../decisiones/20250630-evitar-doble-flujo.md">20250630-evitar-doble-flujo.md</a></li>
+<li><a href="../decisiones/20250630-fix-html-tags.md">20250630-fix-html-tags.md</a></li>
+<li><a href="../decisiones/20250630-js-mirror-guide.md">20250630-js-mirror-guide.md</a></li>
+<li><a href="../decisiones/20250630-overlay-detalle-plantas.md">20250630-overlay-detalle-plantas.md</a></li>
+<li><a href="../decisiones/20250630-permisos-escritura-actions.md">20250630-permisos-escritura-actions.md</a></li>
+<li><a href="../decisiones/20250630-remover-automatizacion-sha.md">20250630-remover-automatizacion-sha.md</a></li>
+<li><a href="../decisiones/20250630-script-sha.md">20250630-script-sha.md</a></li>
+<li><a href="../decisiones/20250701-modular-js.md">20250701-modular-js.md</a></li>
+<li><a href="../decisiones/20250701-prototipo-wasm.md">20250701-prototipo-wasm.md</a></li>
+<li><a href="../decisiones/20250702-fix-counter.md">20250702-fix-counter.md</a></li>
+<li><a href="../decisiones/20250703-js-fallback.md">20250703-js-fallback.md</a></li>
+<li><a href="../decisiones/20250704-controles-canvas.md">20250704-controles-canvas.md</a></li>
+<li><a href="../decisiones/20250705-rust-action.md">20250705-rust-action.md</a></li>
+<li><a href="../decisiones/20250706-fix-gemfile.md">20250706-fix-gemfile.md</a></li>
+<li><a href="../decisiones/20250707-pink-canvas-main.md">20250707-pink-canvas-main.md</a></li>
+<li><a href="../decisiones/20250708-canvas-pantalla-completa.md">20250708-canvas-pantalla-completa.md</a></li>
+<li><a href="../decisiones/20250709-cuadro-controlable.md">20250709-cuadro-controlable.md</a></li>
+<li><a href="../decisiones/20250710-controles-tactiles.md">20250710-controles-tactiles.md</a></li>
+<li><a href="../decisiones/20250711-ordenar-sha-y-remover-jekyll.md">20250711-ordenar-sha-y-remover-jekyll.md</a></li>
+<li><a href="../decisiones/20250712-fix-touch-fallback.md">20250712-fix-touch-fallback.md</a></li>
+<li><a href="../decisiones/20250712-fix-touch-style.md">20250712-fix-touch-style.md</a></li>
+<li><a href="../decisiones/20250713-integrar-game-wasm.md">20250713-integrar-game-wasm.md</a></li>
+<li><a href="../decisiones/20250714-version-canvas.md">20250714-version-canvas.md</a></li>
+<li><a href="../decisiones/20250715-plantas-tactiles.md">20250715-plantas-tactiles.md</a></li>
+<li><a href="../decisiones/20250716-mejorar-readme-instrucciones.md">20250716-mejorar-readme-instrucciones.md</a></li>
+<li><a href="../decisiones/20250716-test-frameworks.md">20250716-test-frameworks.md</a></li>
+<li><a href="../decisiones/20250717-plant-growth.md">20250717-plant-growth.md</a></li>
+<li><a href="../decisiones/20250717-readme-tests.md">20250717-readme-tests.md</a></li>
+<li><a href="../decisiones/20250718-growth-colors-version.md">20250718-growth-colors-version.md</a></li>
+<li><a href="../decisiones/20250719-madurez-overlay-colision.md">20250719-madurez-overlay-colision.md</a></li>
+</ul></div>
             </div>
         </div>
 
@@ -161,13 +133,13 @@ mantenimiento.  Decide si conservar el espejo en JS según el tiempo disponible 
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/bootstrap.bundle.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js"></script>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -232,8 +204,3 @@ mantenimiento.  Decide si conservar el espejo en JS según el tiempo disponible 
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.6.1
-Build Date UTC : 2025-07-01 02:19:07.167943+00:00
--->
