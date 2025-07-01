@@ -58,6 +58,8 @@ mantenimiento.  Decide si conservar el espejo en JS según el tiempo disponible 
 
 Abre `game.html` en un navegador moderno y usa las flechas para mover al personaje.
 
+Para conocer cada función disponible, revisa la [referencia de funciones](funciones.md).
+
 cambios por añadir:
 
 -> sustituir imagenes de baja resolucion con mapas de google (falta creacion de api de google)
