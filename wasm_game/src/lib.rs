@@ -126,6 +126,7 @@ impl Game {
         collected
     }
 
+
     pub fn player_x(&self) -> f64 {
         self.player_x
     }
