@@ -1,0 +1,7 @@
+site_name: Achtli
+site_description: Videojuego ambiental y documentación del proyecto
+site_author: Proyecto Achtli
+repo_url: https://github.com/LuisMAC2022/Achtli
+nav:
+  - Inicio: index.md
+  - Decisiones: decisiones.md
