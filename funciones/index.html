@@ -8,7 +8,7 @@
         <meta name="author" content="Proyecto Achtli">
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Decisiones - Achtli</title>
+        <title>Funciones - Achtli</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -38,10 +38,10 @@
                                 <a href=".." class="nav-link">Inicio</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">Decisiones</a>
+                                <a href="../decisiones/" class="nav-link">Decisiones</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../funciones/" class="nav-link">Funciones</a>
+                                <a href="./" class="nav-link active" aria-current="page">Funciones</a>
                             </li>
                         </ul>
 
@@ -52,17 +52,17 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href=".." class="nav-link">
+                                <a rel="prev" href="../decisiones/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../funciones/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/LuisMAC2022/Achtli/edit/master/docs/decisiones.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                                <a href="https://github.com/LuisMAC2022/Achtli/edit/master/docs/funciones.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                     </ul>
                 </div>
@@ -82,8 +82,16 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#registros-de-decisiones" class="nav-link">Registros de decisiones</a>
+            <li class="nav-item" data-bs-level="1"><a href="#referencia-de-funciones" class="nav-link">Referencia de funciones</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#javascript" class="nav-link">JavaScript</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#rust-wasm_game" class="nav-link">Rust (wasm_game)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -91,45 +99,36 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="registros-de-decisiones">Registros de decisiones</h1>
-<p>La siguiente lista incluye los archivos en la carpeta <code>decisiones</code>.</p>
+<h1 id="referencia-de-funciones">Referencia de funciones</h1>
+<p>Esta página describe brevemente las funciones disponibles en el proyecto.</p>
+<h2 id="javascript">JavaScript</h2>
+<h3 id="jsgame-logicjs">js/game-logic.js</h3>
 <ul>
-<li><a href="../decisiones/20250630-actualizar-sha.md">20250630-actualizar-sha.md</a></li>
-<li><a href="../decisiones/20250630-automatizar-sha-en-actions.md">20250630-automatizar-sha-en-actions.md</a></li>
-<li><a href="../decisiones/20250630-configurar-gh-actions.md">20250630-configurar-gh-actions.md</a></li>
-<li><a href="../decisiones/20250630-crear-agents.md">20250630-crear-agents.md</a></li>
-<li><a href="../decisiones/20250630-evitar-doble-flujo.md">20250630-evitar-doble-flujo.md</a></li>
-<li><a href="../decisiones/20250630-fix-html-tags.md">20250630-fix-html-tags.md</a></li>
-<li><a href="../decisiones/20250630-js-mirror-guide.md">20250630-js-mirror-guide.md</a></li>
-<li><a href="../decisiones/20250630-overlay-detalle-plantas.md">20250630-overlay-detalle-plantas.md</a></li>
-<li><a href="../decisiones/20250630-permisos-escritura-actions.md">20250630-permisos-escritura-actions.md</a></li>
-<li><a href="../decisiones/20250630-remover-automatizacion-sha.md">20250630-remover-automatizacion-sha.md</a></li>
-<li><a href="../decisiones/20250630-script-sha.md">20250630-script-sha.md</a></li>
-<li><a href="../decisiones/20250701-modular-js.md">20250701-modular-js.md</a></li>
-<li><a href="../decisiones/20250701-prototipo-wasm.md">20250701-prototipo-wasm.md</a></li>
-<li><a href="../decisiones/20250702-fix-counter.md">20250702-fix-counter.md</a></li>
-<li><a href="../decisiones/20250703-js-fallback.md">20250703-js-fallback.md</a></li>
-<li><a href="../decisiones/20250704-controles-canvas.md">20250704-controles-canvas.md</a></li>
-<li><a href="../decisiones/20250705-rust-action.md">20250705-rust-action.md</a></li>
-<li><a href="../decisiones/20250706-fix-gemfile.md">20250706-fix-gemfile.md</a></li>
-<li><a href="../decisiones/20250707-pink-canvas-main.md">20250707-pink-canvas-main.md</a></li>
-<li><a href="../decisiones/20250708-canvas-pantalla-completa.md">20250708-canvas-pantalla-completa.md</a></li>
-<li><a href="../decisiones/20250709-cuadro-controlable.md">20250709-cuadro-controlable.md</a></li>
-<li><a href="../decisiones/20250710-controles-tactiles.md">20250710-controles-tactiles.md</a></li>
-<li><a href="../decisiones/20250711-ordenar-sha-y-remover-jekyll.md">20250711-ordenar-sha-y-remover-jekyll.md</a></li>
-<li><a href="../decisiones/20250712-fix-touch-fallback.md">20250712-fix-touch-fallback.md</a></li>
-<li><a href="../decisiones/20250712-fix-touch-style.md">20250712-fix-touch-style.md</a></li>
-<li><a href="../decisiones/20250713-integrar-game-wasm.md">20250713-integrar-game-wasm.md</a></li>
-<li><a href="../decisiones/20250714-version-canvas.md">20250714-version-canvas.md</a></li>
-<li><a href="../decisiones/20250715-plantas-tactiles.md">20250715-plantas-tactiles.md</a></li>
-<li><a href="../decisiones/20250716-mejorar-readme-instrucciones.md">20250716-mejorar-readme-instrucciones.md</a></li>
-<li><a href="../decisiones/20250716-test-frameworks.md">20250716-test-frameworks.md</a></li>
-<li><a href="../decisiones/20250717-plant-growth.md">20250717-plant-growth.md</a></li>
-<li><a href="../decisiones/20250717-readme-tests.md">20250717-readme-tests.md</a></li>
-<li><a href="../decisiones/20250718-growth-colors-version.md">20250718-growth-colors-version.md</a></li>
-<li><a href="../decisiones/20250719-madurez-overlay-colision.md">20250719-madurez-overlay-colision.md</a></li>
-<li><a href="../decisiones/20250720-mkdocs-integracion.md">20250720-mkdocs-integracion.md</a></li>
-<li><a href="../decisiones/20250721-documentar-funciones.md">20250721-documentar-funciones.md</a></li>
+<li><code>seedColor()</code> y <code>matureColor()</code> generan colores aleatorios para las plantas.</li>
+<li><code>jsGrowthInterval(species)</code> define el tiempo de crecimiento según la especie.</li>
+<li><code>jsUpdatePlants(plants, dt)</code> actualiza el avance de todas las plantas.</li>
+<li><code>jsCollectAt(plants, x, y)</code> intenta recolectar una planta madura cercana.</li>
+<li><code>jsFindPlantAt(plants, x, y)</code> devuelve el índice de una planta en las coordenadas.</li>
+<li><code>createInitialPlants()</code> crea el conjunto inicial de plantas para el modo JS.</li>
+</ul>
+<h3 id="jsuijs">js/ui.js</h3>
+<ul>
+<li><code>setupUI(canvas, overlay, plantInfo, actions)</code> conecta los controles del
+  jugador y muestra información de cada planta.</li>
+</ul>
+<h3 id="jsmainjs">js/main.js</h3>
+<ul>
+<li><code>start()</code> es el punto de entrada; carga el módulo wasm y comienza el ciclo de
+  dibujo.</li>
+<li>Funciones internas como <code>movePlayer()</code> o <code>draw()</code> gestionan la lógica de
+  movimiento, colisiones y renderizado.</li>
+</ul>
+<h2 id="rust-wasm_game">Rust (wasm_game)</h2>
+<ul>
+<li><code>draw_pink()</code> pinta el fondo cuando se inicia el juego.</li>
+<li><code>Game</code> gestiona la posición del jugador y las plantas. Sus métodos permiten
+  mover al jugador, actualizar el estado y recolectar.</li>
+<li>En <code>growth.rs</code> se define el cálculo de colores y etapas de crecimiento.</li>
 </ul></div>
             </div>
         </div>
