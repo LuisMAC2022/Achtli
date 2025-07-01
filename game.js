@@ -31,9 +31,9 @@ async function start() {
   } catch (e) {
     console.warn('WASM failed, drawing pink with JS', e);
     jsPlants = [
-      { x: 50, y: 50, mature: true },
-      { x: 150, y: 80, mature: false },
-      { x: 80, y: 150, mature: true }
+      { x: 50, y: 50 },
+      { x: 150, y: 80 },
+      { x: 80, y: 150 }
     ];
   }
 
@@ -51,7 +51,7 @@ async function start() {
       const p = jsPlants[i];
       const dx = x - p.x;
       const dy = y - p.y;
-      if (p.mature && Math.sqrt(dx * dx + dy * dy) < 20) {
+      if (Math.sqrt(dx * dx + dy * dy) < 20) {
         jsPlants.splice(i, 1);
         jsCollected++;
         hit = true;
@@ -76,21 +76,7 @@ async function start() {
   }
 
   function jsCheckCollisions() {
-    if (!jsPlants) return;
-    let i = 0;
-    const cx = player.x + playerSize / 2;
-    const cy = player.y + playerSize / 2;
-    while (i < jsPlants.length) {
-      const p = jsPlants[i];
-      const dx = cx - p.x;
-      const dy = cy - p.y;
-      if (p.mature && Math.sqrt(dx * dx + dy * dy) < 20) {
-        jsPlants.splice(i, 1);
-        jsCollected++;
-      } else {
-        i++;
-      }
-    }
+    jsCollectAt(player.x + playerSize / 2, player.y + playerSize / 2);
   }
 
   canvas.focus();
@@ -218,11 +204,11 @@ async function start() {
 
     if (game) {
       const positions = game.plant_positions();
+      ctx.fillStyle = 'green';
       for (let i = 0; i < positions.length; i++) {
-        const [x, y, mature] = positions[i];
-        ctx.fillStyle = mature ? 'green' : 'lightgreen';
+        const [x, y] = positions[i];
         ctx.beginPath();
-        ctx.arc(x, y, mature ? 12 : 10, 0, Math.PI * 2);
+        ctx.arc(x, y, 10, 0, Math.PI * 2);
         ctx.fill();
       }
       const collected = game.collected();
@@ -234,11 +220,11 @@ async function start() {
       ctx.fillRect(game.player_x(), game.player_y(), playerSize, playerSize);
     } else {
       if (jsPlants) {
+        ctx.fillStyle = 'green';
         for (let i = 0; i < jsPlants.length; i++) {
           const p = jsPlants[i];
-          ctx.fillStyle = p.mature ? 'green' : 'lightgreen';
           ctx.beginPath();
-          ctx.arc(p.x, p.y, p.mature ? 12 : 10, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, 10, 0, Math.PI * 2);
           ctx.fill();
         }
       }
