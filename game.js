@@ -1,5 +1,5 @@
 
-const VERSION = '0.0.0.4';
+const VERSION = '0.0.0.5';
 
 
 /** Devuelve un elemento aleatorio de un arreglo. */
