@@ -1,5 +1,19 @@
 const VERSION = '0.0.0.0';
 
+function randomChoice(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function seedColor() {
+  return randomChoice(['brown', 'black']);
+}
+
+function matureColor() {
+  return randomChoice(['red', 'white', 'blue', 'yellow']);
+}
+
+const MATURE_STAGE = 5;
+
 async function start() {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
@@ -16,6 +30,34 @@ async function start() {
   let game = null;
   let jsPlants = null;
   let jsCollected = 0;
+
+  function jsGrowthInterval(species) {
+    switch (species) {
+      case 'fast':
+        return 1;
+      case 'slow':
+        return 3600;
+      default:
+        return 60;
+    }
+  }
+
+  function jsUpdatePlants(dt) {
+    if (!jsPlants) return;
+    for (const plant of jsPlants) {
+      plant.timer += dt;
+      const interval = jsGrowthInterval(plant.species);
+      while (plant.timer >= interval) {
+        plant.timer -= interval;
+        plant.stage += 1;
+        if (plant.stage === 1) {
+          plant.color = 'green';
+        } else if (plant.stage === MATURE_STAGE) {
+          plant.color = matureColor();
+        }
+      }
+    }
+  }
   try {
     const wasm = await import('./wasm_game/pkg/wasm_game.js');
     await wasm.default();
@@ -25,9 +67,9 @@ async function start() {
   } catch (e) {
     console.warn('WASM failed, drawing pink with JS', e);
     jsPlants = [
-      { x: 50, y: 50 },
-      { x: 150, y: 80 },
-      { x: 80, y: 150 }
+      { x: 50, y: 50, species: 'fast', stage: 0, timer: 0, color: seedColor() },
+      { x: 150, y: 80, species: 'medium', stage: 0, timer: 0, color: seedColor() },
+      { x: 80, y: 150, species: 'slow', stage: 0, timer: 0, color: seedColor() }
     ];
   }
 
@@ -36,6 +78,7 @@ async function start() {
   const speed = 5;
   const counter = document.getElementById('counter');
   let lastCollected = 0;
+  let lastTime = performance.now();
 
   function jsCollectAt(x, y) {
     if (!jsPlants) return false;
@@ -150,6 +193,15 @@ async function start() {
   }
 
   function draw() {
+    const now = performance.now();
+    const dt = (now - lastTime) / 1000;
+    lastTime = now;
+    if (game) {
+      game.update(dt);
+    } else {
+      jsUpdatePlants(dt);
+    }
+
     if (wasmModule) {
       wasmModule.draw_pink();
     } else {
@@ -159,11 +211,11 @@ async function start() {
 
     if (game) {
       const positions = game.plant_positions();
-      ctx.fillStyle = 'green';
       for (let i = 0; i < positions.length; i++) {
-        const [x, y] = positions[i];
+        const [x, y, stage, color] = positions[i];
+        ctx.fillStyle = color;
         ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2);
+        ctx.arc(x, y, 5 + stage, 0, Math.PI * 2);
         ctx.fill();
       }
       const collected = game.collected();
@@ -175,11 +227,11 @@ async function start() {
       ctx.fillRect(game.player_x(), game.player_y(), playerSize, playerSize);
     } else {
       if (jsPlants) {
-        ctx.fillStyle = 'green';
         for (let i = 0; i < jsPlants.length; i++) {
           const p = jsPlants[i];
+          ctx.fillStyle = p.color;
           ctx.beginPath();
-          ctx.arc(p.x, p.y, 10, 0, Math.PI * 2);
+          ctx.arc(p.x, p.y, 5 + p.stage, 0, Math.PI * 2);
           ctx.fill();
         }
       }

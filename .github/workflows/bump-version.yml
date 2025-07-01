@@ -1,0 +1,32 @@
+name: Bump version
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+      - name: Increment version
+        run: |
+          file=game.js
+          current=$(grep -o "const VERSION = '[^']*'" $file | cut -d"'" -f2)
+          IFS='.' read -r -a parts <<< "$current"
+          last_index=$((${#parts[@]}-1))
+          parts[$last_index]=$((parts[$last_index]+1))
+          new_version="${parts[0]}"
+          for i in $(seq 1 $last_index); do
+            new_version+=".${parts[$i]}"
+          done
+          sed -i "s/const VERSION = '[^']*'/const VERSION = '$new_version'/" $file
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git commit -am "Bump version to $new_version" || exit 0
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
