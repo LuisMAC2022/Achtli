@@ -17,6 +17,12 @@ const MATURE_STAGE = 5;
 async function start() {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
+  const overlay = document.getElementById('plant-overlay');
+  const plantInfo = [
+    { name: 'Planta rápida', requirements: 'Riego frecuente', desc: 'Crecimiento veloz' },
+    { name: 'Planta media', requirements: 'Sol y agua moderados', desc: 'Crecimiento regular' },
+    { name: 'Planta lenta', requirements: 'Poca agua', desc: 'Crecimiento lento y resistente' }
+  ];
 
   function resize() {
     canvas.width = window.innerWidth;
@@ -45,9 +51,10 @@ async function start() {
   function jsUpdatePlants(dt) {
     if (!jsPlants) return;
     for (const plant of jsPlants) {
+      if (plant.stage >= MATURE_STAGE) continue;
       plant.timer += dt;
       const interval = jsGrowthInterval(plant.species);
-      while (plant.timer >= interval) {
+      while (plant.stage < MATURE_STAGE && plant.timer >= interval) {
         plant.timer -= interval;
         plant.stage += 1;
         if (plant.stage === 1) {
@@ -89,7 +96,7 @@ async function start() {
       const p = jsPlants[i];
       const dx = x - p.x;
       const dy = y - p.y;
-      if (Math.sqrt(dx * dx + dy * dy) < 20) {
+      if (Math.sqrt(dx * dx + dy * dy) < 20 && p.stage >= MATURE_STAGE) {
         jsPlants.splice(i, 1);
         jsCollected++;
         hit = true;
@@ -180,12 +187,13 @@ async function start() {
   }
 
   function showOverlay(index) {
-    const info = plantInfo[index];
-    if (!info) return;
-    overlay.innerHTML = `<h2>${info.name}</h2>` +
-      `<p>Fase actual: ${info.phase}</p>` +
-      `<p>Requisitos: ${info.requirements}</p>` +
-      `<p>${info.desc}</p>`;
+    const species = game ? game.plant_species(index) : (jsPlants ? jsPlants[index].species : '');
+    const stage = game ? game.plant_stage(index) : (jsPlants ? jsPlants[index].stage : 0);
+    const info = plantInfo[index] || {};
+    overlay.innerHTML = `<h2>${info.name || species}</h2>` +
+      `<p>Fase actual: ${stage}</p>` +
+      `<p>Requisitos: ${info.requirements || ''}</p>` +
+      `<p>${info.desc || ''}</p>`;
     overlay.style.display = 'block';
   }
 

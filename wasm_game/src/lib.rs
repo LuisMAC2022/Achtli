@@ -98,7 +98,9 @@ impl Game {
             let py = self.plants[i].y;
             let dx = self.player_x - px;
             let dy = self.player_y - py;
-            if (dx * dx + dy * dy).sqrt() < 20.0 {
+            if (dx * dx + dy * dy).sqrt() < 20.0
+                && self.plants[i].stage >= growth::MATURE_STAGE
+            {
                 self.plants.remove(i);
                 self.collected += 1;
             } else {
@@ -115,7 +117,9 @@ impl Game {
             let py = self.plants[i].y;
             let dx = x - px;
             let dy = y - py;
-            if (dx * dx + dy * dy).sqrt() < 20.0 {
+            if (dx * dx + dy * dy).sqrt() < 20.0
+                && self.plants[i].stage >= growth::MATURE_STAGE
+            {
                 self.plants.remove(i);
                 self.collected += 1;
                 collected = true;
@@ -145,6 +149,9 @@ impl Game {
     pub fn plant_stage(&self, idx: usize) -> u32 {
         self.plants[idx].stage
     }
+    pub fn plant_species(&self, idx: usize) -> String {
+        self.plants[idx].species.clone()
+    }
     pub fn collected(&self) -> u32 {
         self.collected
     }
@@ -160,6 +167,17 @@ impl Game {
             arr.push(&quad);
         }
         arr
+    }
+
+    pub fn plant_index_at(&self, x: f64, y: f64) -> i32 {
+        for (i, plant) in self.plants.iter().enumerate() {
+            let dx = x - plant.x;
+            let dy = y - plant.y;
+            if (dx * dx + dy * dy).sqrt() < 20.0 {
+                return i as i32;
+            }
+        }
+        -1
     }
 }
 
@@ -181,6 +199,10 @@ mod tests {
         let mut game = Game::new(100.0, 100.0);
         let x = game.plant_x(0);
         let y = game.plant_y(0);
+        // advance plant to maturity
+        for _ in 0..growth::MATURE_STAGE {
+            growth::update_plant(&mut game.plants[0], growth::interval_for_species("fast"));
+        }
         let initial = game.plant_count();
         assert!(game.collect_at(x, y));
         assert_eq!(game.plant_count(), initial - 1);
