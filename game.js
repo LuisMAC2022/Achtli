@@ -1,19 +1,26 @@
+// Versión mostrada en pantalla
 const VERSION = '0.0.0.0';
 
+/** Devuelve un elemento aleatorio de un arreglo. */
 function randomChoice(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+/** Color inicial de cada semilla. */
 function seedColor() {
   return randomChoice(['brown', 'black']);
 }
 
+/** Color aleatorio al madurar la planta. */
 function matureColor() {
   return randomChoice(['red', 'white', 'blue', 'yellow']);
 }
 
 const MATURE_STAGE = 5;
 
+/**
+ * Configura el juego y arranca el ciclo de animación.
+ */
 async function start() {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
@@ -24,6 +31,7 @@ async function start() {
     { name: 'Planta lenta', requirements: 'Poca agua', desc: 'Crecimiento lento y resistente' }
   ];
 
+  /** Ajusta el canvas al tamaño de la ventana. */
   function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -37,6 +45,7 @@ async function start() {
   let jsPlants = null;
   let jsCollected = 0;
 
+  /** Intervalo en segundos para el crecimiento según la especie. */
   function jsGrowthInterval(species) {
     switch (species) {
       case 'fast':
@@ -48,6 +57,7 @@ async function start() {
     }
   }
 
+  /** Controla el avance de todas las plantas en modo JS. */
   function jsUpdatePlants(dt) {
     if (!jsPlants) return;
     for (const plant of jsPlants) {
@@ -88,6 +98,7 @@ async function start() {
   let lastCollected = 0;
   let lastTime = performance.now();
 
+  /** Recolecta una planta madura en las coordenadas indicadas. */
   function jsCollectAt(x, y) {
     if (!jsPlants) return false;
     let i = 0;
@@ -107,6 +118,7 @@ async function start() {
     return hit;
   }
 
+  /** Devuelve el índice de la planta cercana a las coordenadas. */
   function jsFindPlantAt(x, y) {
     if (!jsPlants) return -1;
     for (let i = 0; i < jsPlants.length; i++) {
@@ -120,6 +132,7 @@ async function start() {
     return -1;
   }
 
+  /** Comprueba si el jugador toca una planta madura. */
   function jsCheckCollisions() {
     jsCollectAt(player.x + playerSize / 2, player.y + playerSize / 2);
   }
@@ -161,12 +174,14 @@ async function start() {
   let lastX = 0;
   let lastY = 0;
 
+  /** Inicia el movimiento por arrastre. */
   function startDrag(x, y) {
     dragging = true;
     lastX = x;
     lastY = y;
   }
 
+  /** Mueve al jugador según el desplazamiento del puntero. */
   function moveDrag(x, y) {
     if (!dragging) return;
     const dx = x - lastX;
@@ -182,10 +197,12 @@ async function start() {
     }
   }
 
+  /** Termina el arrastre actual. */
   function endDrag() {
     dragging = false;
   }
 
+  /** Muestra detalles de la planta seleccionada. */
   function showOverlay(index) {
     const species = game ? game.plant_species(index) : (jsPlants ? jsPlants[index].species : '');
     const stage = game ? game.plant_stage(index) : (jsPlants ? jsPlants[index].stage : 0);
@@ -197,6 +214,7 @@ async function start() {
     overlay.style.display = 'block';
   }
 
+  /** Oculta el panel de información. */
   function hideOverlay() {
     overlay.style.display = 'none';
   }
@@ -240,6 +258,7 @@ async function start() {
     }
   });
 
+  /** Dibuja la escena completa y programa el siguiente cuadro. */
   function draw() {
     const now = performance.now();
     const dt = (now - lastTime) / 1000;

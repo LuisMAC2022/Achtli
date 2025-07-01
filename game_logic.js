@@ -1,5 +1,9 @@
+// Fase a partir de la cual se puede recolectar una planta
 const MATURE_STAGE = 5;
 
+/**
+ * Recolecta una planta madura si está dentro del radio de búsqueda.
+ */
 function jsCollectAt(plants, x, y) {
   let i = 0;
   let hit = false;
@@ -17,6 +21,9 @@ function jsCollectAt(plants, x, y) {
   return hit;
 }
 
+/**
+ * Busca el índice de una planta cercana a las coordenadas.
+ */
 function jsFindPlantAt(plants, x, y) {
   for (let i = 0; i < plants.length; i++) {
     const p = plants[i];

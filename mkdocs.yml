@@ -5,3 +5,4 @@ repo_url: https://github.com/LuisMAC2022/Achtli
 nav:
   - Inicio: index.md
   - Decisiones: decisiones.md
+  - Funciones: funciones.md

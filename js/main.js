@@ -2,6 +2,10 @@ import { jsUpdatePlants, jsCollectAt, jsFindPlantAt, createInitialPlants } from 
 import { setupUI } from './ui.js';
 
 const VERSION = '0.0.0.0';
+
+/**
+ * Punto de entrada principal del juego. Inicializa canvas y lógica.
+ */
 async function start() {
   const canvas = document.getElementById('game');
   const ctx = canvas.getContext('2d');
@@ -13,6 +17,7 @@ async function start() {
     { name: 'Planta lenta', requirements: 'Poca agua', desc: 'Crecimiento lento y resistente' }
   ];
 
+  /** Ajusta el tamaño del canvas a la ventana. */
   function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -43,12 +48,14 @@ async function start() {
   let lastCollected = 0;
   let lastTime = performance.now();
 
+  /** Verifica si el jugador recolecta una planta. */
   function jsCheckCollisions() {
     if (jsCollectAt(jsPlants, player.x + playerSize / 2, player.y + playerSize / 2)) {
       jsCollected++;
     }
   }
 
+  /** Mueve al jugador y aplica colisiones según el modo. */
   function movePlayer(dx, dy) {
     if (game) {
       game.move_player(dx, dy);
@@ -59,20 +66,24 @@ async function start() {
     }
   }
 
+  /** Busca el índice de la planta en las coordenadas dadas. */
   function findPlantIndex(x, y) {
     return game ? game.plant_index_at(x, y) : jsFindPlantAt(jsPlants, x, y);
   }
 
+  /** Devuelve la etapa de crecimiento de la planta. */
   function getPlantStage(index) {
     return game ? game.plant_stage(index) : (jsPlants ? jsPlants[index].stage : 0);
   }
 
+  /** Obtiene la especie de la planta. */
   function getPlantSpecies(index) {
     return game ? game.plant_species(index) : (jsPlants ? jsPlants[index].species : '');
   }
 
   setupUI(canvas, overlay, plantInfo, { movePlayer, findPlantIndex, getPlantStage, getPlantSpecies });
 
+  /** Bucle principal de dibujo y actualización. */
   function draw() {
     const now = performance.now();
     const dt = (now - lastTime) / 1000;
