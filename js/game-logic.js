@@ -1,17 +1,30 @@
+// Etapa en la que una planta se considera madura
 export const MATURE_STAGE = 5;
 
+/**
+ * Devuelve un elemento aleatorio del arreglo recibido.
+ */
 function randomChoice(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+/**
+ * Genera un color para la semilla de forma aleatoria.
+ */
 export function seedColor() {
   return randomChoice(['brown', 'black']);
 }
 
+/**
+ * Color aleatorio que toma la planta al madurar.
+ */
 export function matureColor() {
   return randomChoice(['red', 'white', 'blue', 'yellow']);
 }
 
+/**
+ * Intervalo (en segundos) que tarda en crecer cada tipo de planta.
+ */
 export function jsGrowthInterval(species) {
   switch (species) {
     case 'fast':
@@ -23,6 +36,9 @@ export function jsGrowthInterval(species) {
   }
 }
 
+/**
+ * Avanza el crecimiento de todas las plantas según el tiempo transcurrido.
+ */
 export function jsUpdatePlants(plants, dt) {
   if (!plants) return;
   for (const plant of plants) {
@@ -41,6 +57,10 @@ export function jsUpdatePlants(plants, dt) {
   }
 }
 
+/**
+ * Intenta recolectar la planta madura más cercana a las coordenadas.
+ * Devuelve true si alguna fue eliminada del arreglo.
+ */
 export function jsCollectAt(plants, x, y) {
   let i = 0;
   let hit = false;
@@ -58,6 +78,9 @@ export function jsCollectAt(plants, x, y) {
   return hit;
 }
 
+/**
+ * Devuelve el índice de la planta más cercana a las coordenadas.
+ */
 export function jsFindPlantAt(plants, x, y) {
   for (let i = 0; i < plants.length; i++) {
     const p = plants[i];
@@ -70,6 +93,9 @@ export function jsFindPlantAt(plants, x, y) {
   return -1;
 }
 
+/**
+ * Genera el arreglo inicial de plantas para la versión en JavaScript.
+ */
 export function createInitialPlants() {
   return [
     { x: 50, y: 50, species: 'fast', stage: 0, timer: 0, color: seedColor() },

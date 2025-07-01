@@ -1,3 +1,6 @@
+/**
+ * Configura los controles y la interfaz de usuario sobre el canvas.
+ */
 export function setupUI(canvas, overlay, plantInfo, actions) {
   const { movePlayer, findPlantIndex, getPlantStage, getPlantSpecies } = actions;
   const speed = 5;
@@ -6,12 +9,14 @@ export function setupUI(canvas, overlay, plantInfo, actions) {
   let lastX = 0;
   let lastY = 0;
 
+  /** Inicia el arrastre del jugador mediante puntero o toque. */
   function startDrag(x, y) {
     dragging = true;
     lastX = x;
     lastY = y;
   }
 
+  /** Desplaza al jugador mientras se arrastra el puntero. */
   function moveDrag(x, y) {
     if (!dragging) return;
     const dx = x - lastX;
@@ -21,10 +26,12 @@ export function setupUI(canvas, overlay, plantInfo, actions) {
     movePlayer(dx, dy);
   }
 
+  /** Finaliza la operación de arrastre. */
   function endDrag() {
     dragging = false;
   }
 
+  /** Muestra la información de la planta seleccionada. */
   function showOverlay(index) {
     const species = getPlantSpecies(index);
     const stage = getPlantStage(index);
@@ -36,6 +43,7 @@ export function setupUI(canvas, overlay, plantInfo, actions) {
     overlay.style.display = 'block';
   }
 
+  /** Oculta el panel de información de la planta. */
   function hideOverlay() {
     overlay.style.display = 'none';
   }
