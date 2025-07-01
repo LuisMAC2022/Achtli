@@ -1,5 +1,6 @@
-// Versión mostrada en pantalla
-const VERSION = '0.0.0.0';
+
+const VERSION = '0.0.0.1';
+
 
 /** Devuelve un elemento aleatorio de un arreglo. */
 function randomChoice(arr) {
