@@ -5,25 +5,65 @@ Esta página describe brevemente las funciones disponibles en el proyecto.
 ## JavaScript
 
 ### js/game-logic.js
-- `seedColor()` y `matureColor()` generan colores aleatorios para las plantas.
-- `jsGrowthInterval(species)` define el tiempo de crecimiento según la especie.
-- `jsUpdatePlants(plants, dt)` actualiza el avance de todas las plantas.
-- `jsCollectAt(plants, x, y)` intenta recolectar una planta madura cercana.
-- `jsFindPlantAt(plants, x, y)` devuelve el índice de una planta en las coordenadas.
-- `createInitialPlants()` crea el conjunto inicial de plantas para el modo JS.
+<details>
+<summary><code>seedColor()</code> y <code>matureColor()</code></summary>
+Generan colores aleatorios para las plantas.
+</details>
+
+<details>
+<summary><code>jsGrowthInterval(species)</code></summary>
+Define el tiempo de crecimiento según la especie.
+</details>
+
+<details>
+<summary><code>jsUpdatePlants(plants, dt)</code></summary>
+Actualiza el avance de todas las plantas.
+</details>
+
+<details>
+<summary><code>jsCollectAt(plants, x, y)</code></summary>
+Intenta recolectar una planta madura cercana.
+</details>
+
+<details>
+<summary><code>jsFindPlantAt(plants, x, y)</code></summary>
+Devuelve el índice de una planta en las coordenadas.
+</details>
+
+<details>
+<summary><code>createInitialPlants()</code></summary>
+Crea el conjunto inicial de plantas para el modo JS.
+</details>
 
 ### js/ui.js
-- `setupUI(canvas, overlay, plantInfo, actions)` conecta los controles del
-  jugador y muestra información de cada planta.
+<details>
+<summary><code>setupUI(canvas, overlay, plantInfo, actions)</code></summary>
+Conecta los controles del jugador y muestra información de cada planta.
+</details>
 
 ### js/main.js
-- `start()` es el punto de entrada; carga el módulo wasm y comienza el ciclo de
-  dibujo.
-- Funciones internas como `movePlayer()` o `draw()` gestionan la lógica de
-  movimiento, colisiones y renderizado.
+<details>
+<summary><code>start()</code></summary>
+Carga el módulo wasm y comienza el ciclo de dibujo.
+</details>
+
+<details>
+<summary><code>movePlayer()</code> y <code>draw()</code></summary>
+Gestionan la lógica de movimiento, colisiones y renderizado.
+</details>
 
 ## Rust (wasm_game)
-- `draw_pink()` pinta el fondo cuando se inicia el juego.
-- `Game` gestiona la posición del jugador y las plantas. Sus métodos permiten
-  mover al jugador, actualizar el estado y recolectar.
-- En `growth.rs` se define el cálculo de colores y etapas de crecimiento.
+<details>
+<summary><code>draw_pink()</code></summary>
+Pinta el fondo cuando se inicia el juego.
+</details>
+
+<details>
+<summary><code>Game</code></summary>
+Gestiona la posición del jugador y las plantas. Sus métodos permiten mover al jugador, actualizar el estado y recolectar.
+</details>
+
+<details>
+<summary><code>growth.rs</code></summary>
+Define el cálculo de colores y etapas de crecimiento.
+</details>

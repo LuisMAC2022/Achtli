@@ -38,3 +38,4 @@ La siguiente lista incluye los archivos en la carpeta `decisiones`.
 - [20250719-madurez-overlay-colision.md](../decisiones/20250719-madurez-overlay-colision.md)
 - [20250720-mkdocs-integracion.md](../decisiones/20250720-mkdocs-integracion.md)
 - [20250721-documentar-funciones.md](../decisiones/20250721-documentar-funciones.md)
+- [20250722-mkdocs-material.md](../decisiones/20250722-mkdocs-material.md)
