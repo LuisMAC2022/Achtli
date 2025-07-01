@@ -26,20 +26,12 @@ pub fn draw_pink() -> Result<(), JsValue> {
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-#[derive(Clone)]
-struct Plant {
-    x: f64,
-    y: f64,
-    mature: bool,
-}
-
-#[wasm_bindgen]
 pub struct Game {
     width: f64,
     height: f64,
     player_x: f64,
     player_y: f64,
-    plants: Vec<Plant>,
+    plants: Vec<(f64, f64)>,
     collected: u32,
 }
 
@@ -48,9 +40,9 @@ impl Game {
     #[wasm_bindgen(constructor)]
     pub fn new(width: f64, height: f64) -> Game {
         let plants = vec![
-            Plant { x: 50.0, y: 50.0, mature: true },
-            Plant { x: 150.0, y: 80.0, mature: false },
-            Plant { x: 80.0, y: 150.0, mature: true },
+            (50.0, 50.0),
+            (150.0, 80.0),
+            (80.0, 150.0),
         ];
         Game {
             width,
@@ -71,10 +63,10 @@ impl Game {
     fn check_collisions(&mut self) {
         let mut i = 0;
         while i < self.plants.len() {
-            let plant = &self.plants[i];
-            let dx = self.player_x - plant.x;
-            let dy = self.player_y - plant.y;
-            if plant.mature && (dx * dx + dy * dy).sqrt() < 20.0 {
+            let (px, py) = self.plants[i];
+            let dx = self.player_x - px;
+            let dy = self.player_y - py;
+            if (dx * dx + dy * dy).sqrt() < 20.0 {
                 self.plants.remove(i);
                 self.collected += 1;
             } else {
@@ -87,10 +79,10 @@ impl Game {
         let mut i = 0;
         let mut collected = false;
         while i < self.plants.len() {
-            let plant = &self.plants[i];
-            let dx = x - plant.x;
-            let dy = y - plant.y;
-            if plant.mature && (dx * dx + dy * dy).sqrt() < 20.0 {
+            let (px, py) = self.plants[i];
+            let dx = x - px;
+            let dy = y - py;
+            if (dx * dx + dy * dy).sqrt() < 20.0 {
                 self.plants.remove(i);
                 self.collected += 1;
                 collected = true;
@@ -115,18 +107,16 @@ impl Game {
     pub fn player_x(&self) -> f64 { self.player_x }
     pub fn player_y(&self) -> f64 { self.player_y }
     pub fn plant_count(&self) -> usize { self.plants.len() }
-    pub fn plant_x(&self, idx: usize) -> f64 { self.plants[idx].x }
-    pub fn plant_y(&self, idx: usize) -> f64 { self.plants[idx].y }
-    pub fn plant_mature(&self, idx: usize) -> bool { self.plants[idx].mature }
+    pub fn plant_x(&self, idx: usize) -> f64 { self.plants[idx].0 }
+    pub fn plant_y(&self, idx: usize) -> f64 { self.plants[idx].1 }
     pub fn collected(&self) -> u32 { self.collected }
 
     pub fn plant_positions(&self) -> Array {
         let arr = Array::new();
-        for plant in &self.plants {
+        for (x, y) in &self.plants {
             let pair = Array::new();
-            pair.push(&JsValue::from_f64(plant.x));
-            pair.push(&JsValue::from_f64(plant.y));
-            pair.push(&JsValue::from_bool(plant.mature));
+            pair.push(&JsValue::from_f64(*x));
+            pair.push(&JsValue::from_f64(*y));
             arr.push(&pair);
         }
         arr
@@ -156,16 +146,5 @@ mod tests {
         assert!(game.collect_at(x, y));
         assert_eq!(game.plant_count(), initial - 1);
         assert_eq!(game.collected(), 1);
-    }
-
-    #[wasm_bindgen_test]
-    fn collect_at_ignores_immature() {
-        let mut game = Game::new(100.0, 100.0);
-        let x = game.plant_x(1);
-        let y = game.plant_y(1);
-        let initial = game.plant_count();
-        assert!(!game.collect_at(x, y));
-        assert_eq!(game.plant_count(), initial);
-        assert_eq!(game.collected(), 0);
     }
 }
