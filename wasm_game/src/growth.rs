@@ -9,7 +9,7 @@ pub fn interval_for_species(species: &str) -> f64 {
 use crate::Plant;
 use js_sys::Math;
 
-const MATURE_STAGE: u32 = 5;
+pub const MATURE_STAGE: u32 = 5;
 
 pub fn seed_color() -> String {
     if Math::random() < 0.5 {
@@ -26,9 +26,12 @@ fn mature_color() -> String {
 }
 
 pub fn update_plant(plant: &mut Plant, dt: f64) {
+    if plant.stage >= MATURE_STAGE {
+        return;
+    }
     plant.timer += dt;
     let interval = interval_for_species(&plant.species);
-    while plant.timer >= interval {
+    while plant.stage < MATURE_STAGE && plant.timer >= interval {
         plant.timer -= interval;
         plant.stage += 1;
         if plant.stage == 1 {
