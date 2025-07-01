@@ -1,4 +1,4 @@
-const VERSION = '0.0.0.0';
+const VERSION = '0.0.0.1';
 
 function randomChoice(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
