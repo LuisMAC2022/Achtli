@@ -1,3 +1,5 @@
+const MATURE_STAGE = 5;
+
 function jsCollectAt(plants, x, y) {
   let i = 0;
   let hit = false;
@@ -5,7 +7,7 @@ function jsCollectAt(plants, x, y) {
     const p = plants[i];
     const dx = x - p.x;
     const dy = y - p.y;
-    if (Math.sqrt(dx * dx + dy * dy) < 20) {
+    if (Math.sqrt(dx * dx + dy * dy) < 20 && p.stage >= MATURE_STAGE) {
       plants.splice(i, 1);
       hit = true;
     } else {
@@ -27,4 +29,4 @@ function jsFindPlantAt(plants, x, y) {
   return -1;
 }
 
-module.exports = { jsCollectAt, jsFindPlantAt };
+module.exports = { jsCollectAt, jsFindPlantAt, MATURE_STAGE };
