@@ -4,7 +4,7 @@ Esta página describe brevemente las funciones disponibles en el proyecto.
 
 ## JavaScript
 
-### js/game-logic.js
+### [js/game-logic.js](../js/game-logic.js)
 <details>
 <summary><code>seedColor()</code> y <code>matureColor()</code></summary>
 Generan colores aleatorios para las plantas.
@@ -35,13 +35,13 @@ Devuelve el índice de una planta en las coordenadas.
 Crea el conjunto inicial de plantas para el modo JS.
 </details>
 
-### js/ui.js
+### [js/ui.js](../js/ui.js)
 <details>
 <summary><code>setupUI(canvas, overlay, plantInfo, actions)</code></summary>
 Conecta los controles del jugador y muestra información de cada planta.
 </details>
 
-### js/main.js
+### [js/main.js](../js/main.js)
 <details>
 <summary><code>start()</code></summary>
 Carga el módulo wasm y comienza el ciclo de dibujo.
@@ -53,6 +53,8 @@ Gestionan la lógica de movimiento, colisiones y renderizado.
 </details>
 
 ## Rust (wasm_game)
+
+### [wasm_game/src/lib.rs](../wasm_game/src/lib.rs)
 <details>
 <summary><code>draw_pink()</code></summary>
 Pinta el fondo cuando se inicia el juego.
@@ -63,6 +65,7 @@ Pinta el fondo cuando se inicia el juego.
 Gestiona la posición del jugador y las plantas. Sus métodos permiten mover al jugador, actualizar el estado y recolectar.
 </details>
 
+### [wasm_game/src/growth.rs](../wasm_game/src/growth.rs)
 <details>
 <summary><code>growth.rs</code></summary>
 Define el cálculo de colores y etapas de crecimiento.
