@@ -6,6 +6,7 @@ use web_sys::{window, CanvasRenderingContext2d, HtmlCanvasElement};
 
 mod growth;
 
+/// Dibuja un fondo rosa directamente desde WebAssembly.
 #[wasm_bindgen]
 pub fn draw_pink() -> Result<(), JsValue> {
     let document = window().unwrap().document().unwrap();
@@ -38,6 +39,7 @@ pub struct Plant {
 }
 
 impl Plant {
+    /// Crea una planta en la posición indicada.
     fn new(species: &str, x: f64, y: f64) -> Self {
         Self {
             species: species.to_string(),
@@ -63,6 +65,7 @@ pub struct Game {
 #[wasm_bindgen]
 impl Game {
     #[wasm_bindgen(constructor)]
+    /// Inicializa un nuevo juego con las dimensiones dadas.
     pub fn new(width: f64, height: f64) -> Game {
         let plants = vec![
             Plant::new("fast", 50.0, 50.0),
@@ -79,18 +82,21 @@ impl Game {
         }
     }
 
+    /// Desplaza al jugador dentro de los límites del canvas.
     pub fn move_player(&mut self, dx: f64, dy: f64) {
         self.player_x = (self.player_x + dx).clamp(0.0, self.width);
         self.player_y = (self.player_y + dy).clamp(0.0, self.height);
         self.check_collisions();
     }
 
+    /// Actualiza el estado de todas las plantas.
     pub fn update(&mut self, dt: f64) {
         for plant in &mut self.plants {
             growth::update_plant(plant, dt);
         }
     }
 
+    /// Verifica si el jugador ha recolectado alguna planta.
     fn check_collisions(&mut self) {
         let mut i = 0;
         while i < self.plants.len() {
@@ -109,6 +115,7 @@ impl Game {
         }
     }
 
+    /// Recolecta manualmente una planta en las coordenadas proporcionadas.
     pub fn collect_at(&mut self, x: f64, y: f64) -> bool {
         let mut i = 0;
         let mut collected = false;
@@ -131,31 +138,40 @@ impl Game {
     }
 
 
+    /// Coordenada X del jugador.
     pub fn player_x(&self) -> f64 {
         self.player_x
     }
+    /// Coordenada Y del jugador.
     pub fn player_y(&self) -> f64 {
         self.player_y
     }
+    /// Número total de plantas presentes.
     pub fn plant_count(&self) -> usize {
         self.plants.len()
     }
+    /// Coordenada X de la planta especificada.
     pub fn plant_x(&self, idx: usize) -> f64 {
         self.plants[idx].x
     }
+    /// Coordenada Y de la planta especificada.
     pub fn plant_y(&self, idx: usize) -> f64 {
         self.plants[idx].y
     }
+    /// Etapa de crecimiento de la planta.
     pub fn plant_stage(&self, idx: usize) -> u32 {
         self.plants[idx].stage
     }
+    /// Devuelve la especie de la planta.
     pub fn plant_species(&self, idx: usize) -> String {
         self.plants[idx].species.clone()
     }
+    /// Cantidad total de plantas recolectadas.
     pub fn collected(&self) -> u32 {
         self.collected
     }
 
+    /// Devuelve un arreglo con las posiciones y colores de las plantas.
     pub fn plant_positions(&self) -> Array {
         let arr = Array::new();
         for plant in &self.plants {
@@ -169,6 +185,7 @@ impl Game {
         arr
     }
 
+    /// Busca el índice de la planta situada en las coordenadas.
     pub fn plant_index_at(&self, x: f64, y: f64) -> i32 {
         for (i, plant) in self.plants.iter().enumerate() {
             let dx = x - plant.x;
