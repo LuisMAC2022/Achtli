@@ -4,37 +4,6 @@ Esta página describe brevemente las funciones disponibles en el proyecto.
 
 ## JavaScript
 
-### [js/game-logic.js](../js/game-logic.js)
-<details>
-<summary><code>seedColor()</code> y <code>matureColor()</code></summary>
-Generan colores aleatorios para las plantas.
-</details>
-
-<details>
-<summary><code>jsGrowthInterval(species)</code></summary>
-Define el tiempo de crecimiento según la especie.
-</details>
-
-<details>
-<summary><code>jsUpdatePlants(plants, dt)</code></summary>
-Actualiza el avance de todas las plantas.
-</details>
-
-<details>
-<summary><code>jsCollectAt(plants, x, y)</code></summary>
-Intenta recolectar una planta madura cercana.
-</details>
-
-<details>
-<summary><code>jsFindPlantAt(plants, x, y)</code></summary>
-Devuelve el índice de una planta en las coordenadas.
-</details>
-
-<details>
-<summary><code>createInitialPlants()</code></summary>
-Crea el conjunto inicial de plantas para el modo JS.
-</details>
-
 ### [js/ui.js](../js/ui.js)
 <details>
 <summary><code>setupUI(canvas, overlay, plantInfo, actions)</code></summary>

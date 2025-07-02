@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Achtli Game",
   "scripts": {
-    "test": "wasm-pack test --node wasm_game && jest"
+    "test": "wasm-pack test --node wasm_game"
   },
   "devDependencies": {
-    "jest": "^29.7.0"
   }
 }

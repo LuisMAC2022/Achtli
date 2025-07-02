@@ -40,5 +40,6 @@ La siguiente lista incluye los archivos en la carpeta `decisiones`.
 - [20250721-documentar-funciones.md](../decisiones/20250721-documentar-funciones.md)
 - [20250722-mkdocs-material.md](../decisiones/20250722-mkdocs-material.md)
 - [20250723-links-funciones.md](../decisiones/20250723-links-funciones.md)
+- [20250724-remove-js-fallback.md](../decisiones/20250724-remove-js-fallback.md)
 
 Para conocer la implementación de cada sección del juego visita la [referencia de funciones](funciones.md).
