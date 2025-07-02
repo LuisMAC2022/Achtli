@@ -29,34 +29,13 @@ Asegúrate de tener las herramientas básicas para compilar el módulo WebAssemb
 2. Abre `game.html` en un navegador moderno. Puedes hacerlo directamente o sirviendo la carpeta con un pequeño servidor web.
 3. Usa las flechas del teclado o los controles táctiles para mover al personaje.
 
-Si la compilación no está disponible, el juego utiliza automáticamente una versión en JavaScript como respaldo.
-
 ## Pruebas automáticas
-El repositorio ya cuenta con pruebas en **Rust** y **JavaScript**. Puedes ejecutarlas con:
+El repositorio cuenta con pruebas en **Rust**. Puedes ejecutarlas con:
 ```bash
 cargo test       # pruebas de Rust
-npm test         # pruebas de JS y wasm (requiere wasm-pack)
+npm test         # pruebas de wasm (requiere wasm-pack)
 ```
 Asegúrate de que `wasm-pack` esté instalado y disponible en tu `PATH`, ya que `npm test` lo utiliza para compilar y ejecutar la biblioteca WebAssembly. Las pruebas automatizadas verifican que cada parte del proyecto funcione como se espera y se ejecutarán también en GitHub Actions cuando envíes código al repositorio.
-
-Si la compilación no está disponible, el juego utiliza una versión en JavaScript puro como respaldo.
-
-## Respaldo en JavaScript
-
-El archivo `game.js` replica la misma mecánica implementada en Rust para `wasm_game`.  Mueve al personaje,
-detecta colisiones y lleva el conteo de plantas igual que la biblioteca WebAssembly.  Así el título sigue
-funcionando si el módulo wasm falla o no se compila.
-
-Para mantener la coherencia, actualiza el código JavaScript y el Rust al mismo tiempo cada que
-modifiques la lógica del juego.  Conserva la misma interfaz pública y verifica el comportamiento en ambos
-entornos para evitar divergencias.
-
-### ¿Ventaja o desventaja?
-
-Tener dos implementaciones ayuda a depurar y garantiza accesibilidad, pero duplica el esfuerzo de
-mantenimiento.  Decide si conservar el espejo en JS según el tiempo disponible y la utilidad que aporte.
-
-Abre `game.html` en un navegador moderno y usa las flechas para mover al personaje.
 
 Para conocer cada función disponible, revisa la [referencia de funciones](funciones.md).
 

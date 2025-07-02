@@ -17,7 +17,7 @@ jobs:
           persist-credentials: true
       - name: Increment version
         run: |
-          file=game.js
+          file=js/main.js
           current=$(grep -o "const VERSION = '[^']*'" $file | cut -d"'" -f2)
           IFS='.' read -r -a parts <<< "$current"
           last_index=$((${#parts[@]}-1))
