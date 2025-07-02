@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
     
     
       
@@ -296,30 +296,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#respaldo-en-javascript" class="md-nav__link">
-    <span class="md-ellipsis">
-      Respaldo en JavaScript
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Respaldo en JavaScript">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ventaja-o-desventaja" class="md-nav__link">
-    <span class="md-ellipsis">
-      ¿Ventaja o desventaja?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -425,30 +401,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#respaldo-en-javascript" class="md-nav__link">
-    <span class="md-ellipsis">
-      Respaldo en JavaScript
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Respaldo en JavaScript">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ventaja-o-desventaja" class="md-nav__link">
-    <span class="md-ellipsis">
-      ¿Ventaja o desventaja?
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -496,25 +448,12 @@
 <li>Abre <code>game.html</code> en un navegador moderno. Puedes hacerlo directamente o sirviendo la carpeta con un pequeño servidor web.</li>
 <li>Usa las flechas del teclado o los controles táctiles para mover al personaje.</li>
 </ol>
-<p>Si la compilación no está disponible, el juego utiliza automáticamente una versión en JavaScript como respaldo.</p>
 <h2 id="pruebas-automaticas">Pruebas automáticas</h2>
-<p>El repositorio ya cuenta con pruebas en <strong>Rust</strong> y <strong>JavaScript</strong>. Puedes ejecutarlas con:</p>
+<p>El repositorio cuenta con pruebas en <strong>Rust</strong>. Puedes ejecutarlas con:</p>
 <pre><code class="language-bash">cargo test       # pruebas de Rust
-npm test         # pruebas de JS y wasm (requiere wasm-pack)
+npm test         # pruebas de wasm (requiere wasm-pack)
 </code></pre>
 <p>Asegúrate de que <code>wasm-pack</code> esté instalado y disponible en tu <code>PATH</code>, ya que <code>npm test</code> lo utiliza para compilar y ejecutar la biblioteca WebAssembly. Las pruebas automatizadas verifican que cada parte del proyecto funcione como se espera y se ejecutarán también en GitHub Actions cuando envíes código al repositorio.</p>
-<p>Si la compilación no está disponible, el juego utiliza una versión en JavaScript puro como respaldo.</p>
-<h2 id="respaldo-en-javascript">Respaldo en JavaScript</h2>
-<p>El archivo <code>game.js</code> replica la misma mecánica implementada en Rust para <code>wasm_game</code>.  Mueve al personaje,
-detecta colisiones y lleva el conteo de plantas igual que la biblioteca WebAssembly.  Así el título sigue
-funcionando si el módulo wasm falla o no se compila.</p>
-<p>Para mantener la coherencia, actualiza el código JavaScript y el Rust al mismo tiempo cada que
-modifiques la lógica del juego.  Conserva la misma interfaz pública y verifica el comportamiento en ambos
-entornos para evitar divergencias.</p>
-<h3 id="ventaja-o-desventaja">¿Ventaja o desventaja?</h3>
-<p>Tener dos implementaciones ayuda a depurar y garantiza accesibilidad, pero duplica el esfuerzo de
-mantenimiento.  Decide si conservar el espejo en JS según el tiempo disponible y la utilidad que aporte.</p>
-<p>Abre <code>game.html</code> en un navegador moderno y usa las flechas para mover al personaje.</p>
 <p>Para conocer cada función disponible, revisa la <a href="funciones/">referencia de funciones</a>.</p>
 <p>cambios por añadir:</p>
 <p>-&gt; sustituir imagenes de baja resolucion con mapas de google (falta creacion de api de google)
@@ -570,7 +509,7 @@ mantenimiento.  Decide si conservar el espejo en JS según el tiempo disponible 
       <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="assets/javascripts/bundle.56ea9cef.min.js"></script>
       
     
   </body>
