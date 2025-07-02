@@ -1,6 +1,6 @@
 import { setupUI } from './ui.js';
 
-const VERSION = '0.0.0.0';
+const VERSION = '0.0.0.1';
 
 /**
  * Punto de entrada principal del juego. Inicializa canvas y lógica.
