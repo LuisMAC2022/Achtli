@@ -13,29 +13,13 @@ Conecta los controles del jugador y muestra información de cada planta.
 ### [js/main.js](../js/main.js)
 <details>
 <summary><code>start()</code></summary>
-Carga el módulo wasm y comienza el ciclo de dibujo.
+Inicializa el prototipo en JavaScript y comienza el ciclo de juego.
 </details>
 
 <details>
-<summary><code>movePlayer()</code> y <code>draw()</code></summary>
-Gestionan la lógica de movimiento, colisiones y renderizado.
+<summary><code>Plant</code>, <code>Game</code></summary>
+Modelan el crecimiento de las plantas, la aparición de insectos y el movimiento del jugador.
 </details>
 
 ## Rust (wasm_game)
-
-### [wasm_game/src/lib.rs](../wasm_game/src/lib.rs)
-<details>
-<summary><code>draw_pink()</code></summary>
-Pinta el fondo cuando se inicia el juego.
-</details>
-
-<details>
-<summary><code>Game</code></summary>
-Gestiona la posición del jugador y las plantas. Sus métodos permiten mover al jugador, actualizar el estado y recolectar.
-</details>
-
-### [wasm_game/src/growth.rs](../wasm_game/src/growth.rs)
-<details>
-<summary><code>growth.rs</code></summary>
-Define el cálculo de colores y etapas de crecimiento.
-</details>
+El motor en WebAssembly usado anteriormente permanece en el repositorio como referencia histórica, pero no es necesario para ejecutar el prototipo en JavaScript.
