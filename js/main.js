@@ -1,6 +1,6 @@
 import { setupUI } from './ui.js';
 
-const VERSION = '0.1.0';
+const VERSION = '0.1.1';
 
 // Definiciones de plantas e insectos
 const plantInfo = [
